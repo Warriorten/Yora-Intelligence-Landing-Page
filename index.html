@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yora Health — Supplement Intelligence</title>
+    <meta
+      name="description"
+      content="Intelligence behind better supplement decisions. Yora transforms fragmented supplement data into actionable product intelligence for enterprise and consumers."
+    />
+    <meta property="og:title" content="Yora Health — Supplement Intelligence" />
+    <meta
+      property="og:description"
+      content="One intelligence platform. Multiple applications. Deeper insight into supplement quality."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              yora: {
+                white: "#FFFFFF",
+                cream: "#FFF9E6",
+                sage: "#82CA9D",
+                "sage-dark": "#6BB887",
+                grass: "#3D9B6A",
+                yellow: "#F5C518",
+                ink: "#1A1A1A",
+                heading: "#222222",
+                muted: "#666666",
+                border: "#ECE8DF",
+                surface: "#FAF7F0",
+              },
+            },
+            fontFamily: {
+              display: ["Fraunces", "Georgia", "serif"],
+              sans: ["DM Sans", "system-ui", "sans-serif"],
+            },
+            maxWidth: {
+              content: "70rem",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="bg-yora-white text-yora-ink font-sans antialiased">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header sticky top-0 z-50 bg-yora-white/90 backdrop-blur-md" data-header>
+      <div class="mx-auto max-w-content px-5 sm:px-8 flex items-center justify-between h-[4.25rem]">
+        <a href="#home" class="flex items-center gap-2.5" aria-label="Yora Home">
+          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-yora-yellow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="10" r="5" fill="#3D9B6A" />
+              <circle cx="10" cy="9" r="0.8" fill="#1A1A1A" />
+              <circle cx="14" cy="9" r="0.8" fill="#1A1A1A" />
+              <path d="M10.5 12h3" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="font-display text-xl text-yora-heading tracking-tight">Yora</span>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-9" aria-label="Primary">
+          <a href="#about" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">About</a>
+          <a href="#intelligence" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">Intelligence</a>
+          <a href="#solutions" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">Solutions</a>
+          <a href="#app" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">App</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <a href="#demo" class="btn-primary hidden sm:inline-flex text-sm py-2.5 px-5">Request a Demo</a>
+          <button
+            type="button"
+            class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-yora-border"
+            data-nav-toggle
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            aria-label="Open menu"
+          >
+            <svg class="h-5 w-5" data-icon-open fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+            <svg class="h-5 w-5 hidden" data-icon-close fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-nav" class="nav-panel lg:hidden border-t border-yora-border bg-yora-white" data-nav-panel>
+        <nav class="mx-auto max-w-content px-5 py-4 flex flex-col gap-1" aria-label="Mobile">
+          <a href="#about" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>About</a>
+          <a href="#intelligence" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>Intelligence</a>
+          <a href="#solutions" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>Solutions</a>
+          <a href="#app" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>App</a>
+          <a href="#demo" class="btn-primary mt-2 w-full" data-nav-link>Request a Demo</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Hero — Function-like clarity -->
+      <section id="home" class="hero">
+        <div class="mx-auto max-w-content px-5 sm:px-8">
+          <div class="hero-grid">
+            <div>
+              <p class="eyebrow mb-4">Yora Intelligence</p>
+              <h1 class="display-italic text-4xl sm:text-5xl lg:text-[3.5rem] text-yora-heading leading-[1.1]">
+                Intelligence behind better supplement decisions.
+              </h1>
+              <p class="mt-5 text-lg text-yora-muted leading-relaxed max-w-md">
+                Yora turns fragmented supplement data into structured product intelligence —
+                so healthcare, practitioner and supplement platforms can evaluate products with clarity.
+              </p>
+              <div class="mt-8 flex flex-wrap items-center gap-3">
+                <a href="#demo" class="btn-primary">Request a Demo</a>
+                <a href="#intelligence" class="btn-secondary">See how it works</a>
+              </div>
+              <dl class="mt-12 grid grid-cols-3 gap-4 max-w-lg">
+                <div>
+                  <dt class="text-xs text-yora-muted uppercase tracking-wide">Architecture</dt>
+                  <dd class="mt-1 font-display text-2xl text-yora-heading">2 scores</dd>
+                </div>
+                <div>
+                  <dt class="text-xs text-yora-muted uppercase tracking-wide">Built for</dt>
+                  <dd class="mt-1 font-display text-2xl text-yora-heading">Enterprise</dd>
+                </div>
+                <div>
+                  <dt class="text-xs text-yora-muted uppercase tracking-wide">Also</dt>
+                  <dd class="mt-1 font-display text-2xl text-yora-heading">Consumer</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="hero-visual reveal">
+              <img
+                src="assets/images/hero-nature-science.png"
+                alt="Computer analysis beside laboratory science"
+                width="1200"
+                height="900"
+                fetchpriority="high"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works — numbered like Function -->
+      <section class="py-20 md:py-28 band-cream" aria-labelledby="how-heading">
+        <div class="mx-auto max-w-content px-5 sm:px-8">
+          <div class="max-w-xl">
+            <p class="eyebrow mb-3">How it works</p>
+            <h2 id="how-heading" class="display-italic text-3xl sm:text-4xl text-yora-heading">
+              From labels to decision-ready intelligence.
+            </h2>
+          </div>
+
+          <ol class="mt-14 grid gap-10 md:grid-cols-3">
+            <li class="reveal">
+              <p class="step-num">01</p>
+              <h3 class="mt-4 text-xl font-semibold text-yora-heading">Deep product intelligence</h3>
+              <p class="mt-2 text-yora-muted leading-relaxed">
+                Analyze ingredients, forms, dosages and formulations behind supplement products.
+              </p>
+            </li>
+            <li class="reveal reveal-delay-1">
+              <p class="step-num">02</p>
+              <h3 class="mt-4 text-xl font-semibold text-yora-heading">Two-score architecture</h3>
+              <p class="mt-2 text-yora-muted leading-relaxed">
+                Independently evaluate formulation quality and available verification evidence.
+              </p>
+            </li>
+            <li class="reveal reveal-delay-2">
+              <p class="step-num">03</p>
+              <h3 class="mt-4 text-xl font-semibold text-yora-heading">Enterprise integration</h3>
+              <p class="mt-2 text-yora-muted leading-relaxed">
+                Deliver explainable intelligence through APIs and existing customer workflows.
+              </p>
+            </li>
+          </ol>
+
+          <a href="#demo" class="btn-primary mt-12">Request a Demo</a>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="py-20 md:py-28">
+        <div class="mx-auto max-w-content px-5 sm:px-8">
+          <div class="grid gap-14 lg:grid-cols-12 items-start">
+            <div class="lg:col-span-7 reveal">
+              <p class="eyebrow mb-3">About Yora</p>
+              <h2 class="display-italic text-3xl sm:text-4xl text-yora-heading leading-tight">
+                Making supplement intelligence more accessible, reliable and actionable.
+              </h2>
+              <div class="mt-6 space-y-4 text-yora-muted leading-relaxed text-lg">
+                <p>
+                  The global supplement industry offers an enormous selection of products, yet understanding
+                  true formulation quality remains difficult. Information is fragmented across manufacturers,
+                  labels, regulatory databases and other sources.
+                </p>
+                <p class="text-yora-heading font-medium">Yora was created to address this information gap.</p>
+                <p>
+                  Our platform connects products with ingredients, specific forms, dosages and verification
+                  evidence — transforming fragmented data into structured, explainable intelligence.
+                </p>
+                <p>
+                  At the centre is our two-score architecture: formulation quality evaluated independently
+                  from verification confidence, so certifications alone are never mistaken for superior formulation.
+                </p>
+              </div>
+              <a href="#demo" class="btn-primary mt-8">Request a Demo</a>
+            </div>
+
+            <aside class="lg:col-span-5 reveal reveal-delay-1 space-y-4">
+              <div class="media-frame h-48">
+                <img class="media-thumb" src="assets/images/about-family-park.jpg" alt="Family playing together in a park" width="1000" height="667" loading="lazy" />
+              </div>
+              <div class="card-soft p-6 sm:p-8">
+                <p class="tag mb-4">Two-score architecture</p>
+                <h3 class="text-lg font-semibold text-yora-heading mb-5">Independent dimensions</h3>
+                <div class="space-y-4">
+                  <div class="flex items-center gap-4 bg-yora-white rounded-2xl p-4">
+                    <div class="score-wrap shrink-0">
+                      <div class="score-ring" style="--pct: 82; --ring-color: #82ca9d" aria-hidden="true"></div>
+                      <span class="score-ring-inner">82</span>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-yora-heading">Product Score</p>
+                      <p class="text-sm text-yora-muted">Formulation quality</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-4 bg-yora-white rounded-2xl p-4">
+                    <div class="score-wrap shrink-0">
+                      <div class="score-ring" style="--pct: 64; --ring-color: #3d9b6a" aria-hidden="true"></div>
+                      <span class="score-ring-inner">64</span>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-yora-heading">Verification Score</p>
+                      <p class="text-sm text-yora-muted">Supporting evidence</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- Intelligence -->
+      <section id="intelligence" class="py-20 md:py-28 band-cream">
+        <div class="mx-auto max-w-content px-5 sm:px-8">
+          <div class="max-w-2xl reveal">
+            <p class="eyebrow mb-3">Yora Intelligence</p>
+            <h2 class="display-italic text-3xl sm:text-4xl text-yora-heading leading-tight">
+              From fragmented data to decision-ready intelligence.
+            </h2>
+          </div>
+
+          <ol class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <li class="reveal">
+              <p class="step-num">01</p>
+              <h3 class="mt-3 font-semibold text-yora-heading">Inputs</h3>
+              <p class="mt-2 text-sm text-yora-muted leading-relaxed">Labels, barcodes, manufacturer data, ingredients, regulatory databases and verification evidence.</p>
+            </li>
+            <li class="reveal reveal-delay-1">
+              <p class="step-num">02</p>
+              <h3 class="mt-3 font-semibold text-yora-heading">Matching</h3>
+              <p class="mt-2 text-sm text-yora-muted leading-relaxed">Normalize ingredient names, forms, quantities and formulation information.</p>
+            </li>
+            <li class="reveal reveal-delay-2">
+              <p class="step-num">03</p>
+              <h3 class="mt-3 font-semibold text-yora-heading">Analysis</h3>
+              <p class="mt-2 text-sm text-yora-muted leading-relaxed">Product Score for formulation. Verification Score for supporting evidence.</p>
+            </li>
+            <li class="reveal reveal-delay-3">
+              <p class="step-num">04</p>
+              <h3 class="mt-3 font-semibold text-yora-heading">Outputs</h3>
+              <p class="mt-2 text-sm text-yora-muted leading-relaxed">Explainable scores, comparisons, confidence and structured API outputs.</p>
+            </li>
+          </ol>
+
+          <div class="mt-16 grid gap-6 lg:grid-cols-5 reveal">
+            <div class="lg:col-span-3 card overflow-hidden bg-yora-white">
+              <div class="relative h-44">
+                <img class="media-thumb" src="assets/images/product-capsules.jpg" alt="Supplement capsules" width="1000" height="400" loading="lazy" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div class="absolute bottom-0 p-5 text-white">
+                  <p class="text-xs uppercase tracking-wider text-white/70">Illustrative analysis</p>
+                  <h3 class="font-display text-xl italic mt-1">Omega-3 Ultra Complex</h3>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex flex-wrap gap-8">
+                  <div class="flex items-center gap-3">
+                    <div class="score-wrap">
+                      <div class="score-ring" style="--pct: 88" aria-hidden="true"></div>
+                      <span class="score-ring-inner">88</span>
+                    </div>
+                    <div>
+                      <p class="text-sm font-semibold">Product Score</p>
+                      <p class="text-xs text-yora-muted">Formulation quality</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <div class="score-wrap">
+                      <div class="score-ring" style="--pct: 71; --ring-color: #3d9b6a" aria-hidden="true"></div>
+                      <span class="score-ring-inner">71</span>
+                    </div>
+                    <div>
+                      <p class="text-sm font-semibold">Verification Score</p>
+                      <p class="text-xs text-yora-muted">Supporting evidence</p>
+                    </div>
+                  </div>
+                </div>
+                <ul class="mt-6 space-y-2 text-sm text-yora-muted">
+                  <li>✓ Forms and dosages mapped to normalized records</li>
+                  <li>✓ Formulation completeness vs category benchmarks</li>
+                  <li>– Some evidence unavailable (not a verification failure)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="lg:col-span-2 space-y-4">
+              <div class="card bg-yora-white p-5 border-l-4 border-l-yora-yellow">
+                <p class="font-semibold text-yora-heading">V4.0 vs planned</p>
+                <p class="mt-2 text-sm text-yora-muted leading-relaxed">
+                  Examples reflect the current V4.0 engine. Planned capabilities are labeled and not presented as live.
+                </p>
+              </div>
+              <div class="card bg-yora-white p-5 border-l-4 border-l-yora-sage">
+                <p class="font-semibold text-yora-heading">Evidence unavailable ≠ failed</p>
+                <p class="mt-2 text-sm text-yora-muted leading-relaxed">
+                  Missing evidence is a limitation — never communicated as a failed verification.
+                </p>
+              </div>
+              <div class="media-frame h-28">
+                <img class="media-thumb" src="assets/images/leaves.jpg" alt="Green leaves" loading="lazy" />
+              </div>
+              <a href="#demo" class="btn-primary w-full">Request a Demo</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Solutions -->
+      <section id="solutions" class="py-20 md:py-28">
+        <div class="mx-auto max-w-content px-5 sm:px-8">
+          <div class="max-w-2xl reveal">
+            <p class="eyebrow mb-3">Enterprise solutions</p>
+            <h2 class="display-italic text-3xl sm:text-4xl text-yora-heading leading-tight">
+              Built to power smarter health and supplement platforms.
+            </h2>
+          </div>
+
+          <div class="mt-14 grid gap-5 sm:grid-cols-2">
+            <article class="card-soft p-0 overflow-hidden reveal">
+              <div class="media-frame h-40 rounded-none">
+                <img class="media-thumb" src="assets/images/solution-retail.jpg" alt="" loading="lazy" />
+              </div>
+              <div class="p-6">
+                <p class="text-xs font-semibold uppercase tracking-wider text-yora-grass">Marketplaces &amp; retailers</p>
+                <h3 class="mt-2 text-xl font-semibold text-yora-heading">Catalog Intelligence</h3>
+                <p class="mt-2 text-sm text-yora-muted leading-relaxed">Standardize, enrich and analyze large supplement catalogs.</p>
+              </div>
+            </article>
+            <article class="card-soft p-0 overflow-hidden reveal reveal-delay-1">
+              <div class="media-frame h-40 rounded-none">
+                <img class="media-thumb" src="assets/images/solution-clinical.jpg" alt="" loading="lazy" />
+              </div>
+              <div class="p-6">
+                <p class="text-xs font-semibold uppercase tracking-wider text-yora-grass">Practitioners</p>
+                <h3 class="mt-2 text-xl font-semibold text-yora-heading">Health &amp; Practitioner Platforms</h3>
+                <p class="mt-2 text-sm text-yora-muted leading-relaxed">Deeper product-level intelligence for clinical evaluation.</p>
+              </div>
+            </article>
+            <article class="card-soft p-0 overflow-hidden reveal reveal-delay-2">
+              <div class="media-frame h-40 rounded-none">
+                <img class="media-thumb" src="assets/images/solution-commerce.jpg" alt="" loading="lazy" />
+              </div>
+              <div class="p-6">
+                <p class="text-xs font-semibold uppercase tracking-wider text-yora-grass">Brands &amp; commerce</p>
+                <h3 class="mt-2 text-xl font-semibold text-yora-heading">Product Analysis &amp; Comparison</h3>
+                <p class="mt-2 text-sm text-yora-muted leading-relaxed">Compare forms, dosages, formulation and verification evidence.</p>
+              </div>
+            </article>
+            <article class="card-soft p-0 overflow-hidden reveal reveal-delay-3">
+              <div class="media-frame h-40 rounded-none">
+                <img class="media-thumb" src="assets/images/solution-ai.jpg" alt="" loading="lazy" />
+              </div>
+              <div class="p-6">
+                <p class="text-xs font-semibold uppercase tracking-wider text-yora-grass">AI &amp; health tech</p>
+                <h3 class="mt-2 text-xl font-semibold text-yora-heading">AI &amp; Data Infrastructure</h3>
+                <p class="mt-2 text-sm text-yora-muted leading-relaxed">Normalized intelligence for recommendation and AI applications.</p>
+              </div>
+            </article>
+          </div>
+
+          <p class="mt-8 text-sm text-yora-muted reveal">Industry archetypes illustrate fit only — not existing clients or partners.</p>
+          <a href="#demo" class="btn-primary mt-6 reveal">Request a Demo</a>
+        </div>
+      </section>
+
+      <!-- App -->
+      <section id="app" class="py-20 md:py-28 band-cream">
+        <div class="mx-auto max-w-content px-5 sm:px-8">
+          <div class="grid gap-12 lg:grid-cols-2 items-center">
+            <div class="reveal order-2 lg:order-1 flex justify-center">
+              <div class="phone-frame" aria-hidden="true">
+                <div class="phone-notch"></div>
+                <div class="px-5 pt-6 pb-6 h-full bg-yora-white flex flex-col items-center text-center">
+                  <div class="w-28 h-28 rounded-full bg-yora-cream flex items-center justify-center mb-4" aria-hidden="true">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                      <circle cx="32" cy="28" r="16" fill="#F5C518"/>
+                      <circle cx="26" cy="26" r="1.8" fill="#1A1A1A"/>
+                      <circle cx="38" cy="26" r="1.8" fill="#1A1A1A"/>
+                      <path d="M27 32c2 2 8 2 10 0" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round"/>
+                      <path d="M18 30c-6-2-8 4-4 8M46 30c6-2 8 4 4 8M28 44c-2 6 2 10 4 8M36 44c2 6-2 10-4 8" stroke="#3D9B6A" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <p class="display-italic text-2xl text-yora-heading">Welcome!</p>
+                  <p class="mt-2 text-xs text-yora-muted leading-relaxed px-2">
+                    Yora shows you what’s inside your supplements so you know what truly supports your health.
+                  </p>
+                  <div class="mt-10 w-full rounded-xl bg-yora-sage text-white text-sm font-semibold py-3">Continue</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="reveal order-1 lg:order-2">
+              <p class="eyebrow mb-3">Yora Health App</p>
+              <p class="text-sm font-semibold text-yora-grass mb-2">Powered by Yora Intelligence.</p>
+              <h2 class="display-italic text-3xl sm:text-4xl text-yora-heading leading-tight">
+                Know more about the supplements you take.
+              </h2>
+              <p class="mt-4 text-yora-muted leading-relaxed text-lg">
+                Bring the same two-score intelligence to consumers — scan a product to explore formulation,
+                forms, dosages, and clear explanations.
+              </p>
+              <div class="mt-8 flex flex-wrap items-center gap-4">
+                <a href="#app" class="store-badge" aria-disabled="true">
+                  <span class="text-left leading-tight">
+                    <span class="block text-[10px] opacity-80">Coming soon on the</span>
+                    <span class="block text-sm font-semibold">App Store</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Demo -->
+      <section id="demo" class="py-20 md:py-28 band-ink">
+        <div class="mx-auto max-w-content px-5 sm:px-8">
+          <div class="grid gap-12 lg:grid-cols-2 lg:gap-16 items-start">
+            <div class="reveal">
+              <p class="eyebrow text-yora-sage mb-3">Request a demo</p>
+              <h2 class="display-italic text-3xl sm:text-4xl leading-tight text-white">
+                Discover what Yora can do for your business.
+              </h2>
+              <p class="mt-4 text-white/70 leading-relaxed text-lg">
+                See how Yora Intelligence could enhance product intelligence, improve workflows and unlock new capabilities.
+              </p>
+            </div>
+
+            <div class="reveal reveal-delay-1">
+              <div class="rounded-2xl bg-yora-white p-6 sm:p-8 text-yora-ink">
+                <div class="form-success mb-4" data-form-success role="status" aria-live="polite">
+                  Thanks for your interest. This demo form is not connected to a live backend yet.
+                </div>
+
+                <form data-demo-form novalidate>
+                  <div class="honeypot" aria-hidden="true">
+                    <label for="company_url">Company website</label>
+                    <input type="text" id="company_url" name="company_url" tabindex="-1" autocomplete="off" />
+                  </div>
+
+                  <div class="space-y-4">
+                    <div class="form-field" data-field="name">
+                      <label for="contact_name">Contact name *</label>
+                      <input type="text" id="contact_name" name="contact_name" autocomplete="name" required />
+                      <p class="error-msg">Please enter your name.</p>
+                    </div>
+                    <div class="form-field" data-field="email">
+                      <label for="business_email">Business email *</label>
+                      <input type="email" id="business_email" name="business_email" autocomplete="email" required />
+                      <p class="error-msg">Please enter a valid business email.</p>
+                    </div>
+                    <div class="form-field" data-field="company">
+                      <label for="company_name">Company name *</label>
+                      <input type="text" id="company_name" name="company_name" autocomplete="organization" required />
+                      <p class="error-msg">Please enter your company name.</p>
+                    </div>
+                    <div class="form-field">
+                      <label for="job_title">Job title / role</label>
+                      <input type="text" id="job_title" name="job_title" />
+                    </div>
+                    <div class="form-field">
+                      <label for="industry">Industry</label>
+                      <select id="industry" name="industry">
+                        <option value="">Select an industry</option>
+                        <option>Healthcare / Digital Health</option>
+                        <option>Practitioner Platform</option>
+                        <option>Supplement Brand / Manufacturer</option>
+                        <option>Retail / Marketplace</option>
+                        <option>Data / AI Platform</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+                    <div class="form-field">
+                      <label for="explore">What would you like to explore?</label>
+                      <textarea id="explore" name="explore" rows="3"></textarea>
+                    </div>
+                    <div class="flex items-start gap-3 text-sm">
+                      <input type="checkbox" id="marketing_consent" name="marketing_consent" class="mt-1" />
+                      <label for="marketing_consent" class="text-yora-muted font-normal">
+                        Optional: occasional product updates (separate from demo request).
+                      </label>
+                    </div>
+                    <p class="text-xs text-yora-muted">
+                      By submitting, you agree to our <a href="#privacy" class="underline text-yora-grass">Privacy Notice</a> (placeholder).
+                    </p>
+                    <button type="submit" class="btn-primary w-full">Submit demo request</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-yora-white border-t border-yora-border py-14">
+      <div class="mx-auto max-w-content px-5 sm:px-8">
+        <div class="grid gap-10 md:grid-cols-4">
+          <div>
+            <a href="#home" class="font-display text-xl text-yora-heading">Yora</a>
+            <p class="mt-3 text-sm text-yora-muted">Intelligence behind better supplement decisions.</p>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-yora-muted mb-3">Navigate</p>
+            <ul class="space-y-2 text-sm text-yora-heading">
+              <li><a href="#about" class="hover:text-yora-grass">About</a></li>
+              <li><a href="#intelligence" class="hover:text-yora-grass">Intelligence</a></li>
+              <li><a href="#solutions" class="hover:text-yora-grass">Solutions</a></li>
+              <li><a href="#app" class="hover:text-yora-grass">App</a></li>
+              <li><a href="#demo" class="hover:text-yora-grass">Request a Demo</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-yora-muted mb-3">Legal</p>
+            <ul class="space-y-2 text-sm">
+              <li><a id="privacy" href="#privacy" class="hover:text-yora-grass">Privacy <span class="text-yora-muted">(soon)</span></a></li>
+              <li><a href="#terms" class="hover:text-yora-grass">Terms <span class="text-yora-muted">(soon)</span></a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-yora-muted mb-3">Contact</p>
+            <a href="mailto:hello@yora.health" class="text-sm hover:text-yora-grass">hello@yora.health</a>
+          </div>
+        </div>
+        <div class="mt-10 pt-6 border-t border-yora-border text-sm text-yora-muted flex flex-wrap justify-between gap-2">
+          <p>© <span data-year>2026</span> Yora Health</p>
+          <p>Supplement intelligence, redefined.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
