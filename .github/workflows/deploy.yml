@@ -1,0 +1,71 @@
+# Deploy the landing page: push to main → S3 bucket → CloudFront.
+#
+# The bucket, the CloudFront distribution and the OIDC role live in the Yora-Intelligence
+# repo (infra/environments/staging/landing.tf). No static AWS keys: the job assumes the
+# role through GitHub OIDC, and the role only trusts this repo's main branch.
+#
+# What is published: the site files only (index.html, css/, js/, assets/). docs/, README
+# and repo config stay in git. HTML is revalidated on every visit so a deploy is seen at
+# once; css/js/images are cached for a day (file names carry no hash).
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: deploy-landing
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: ca-central-1
+  ROLE_ARN: arn:aws:iam::654049396345:role/yora-gha-landing
+  BUCKET: yora-landing-site-654049396345
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Check the site before publishing
+        run: |
+          test -f index.html
+          # every local file the page references must exist
+          missing=0
+          for f in $(grep -oE '(src|href)="[^"#:]+"' index.html | sed -E 's/^(src|href)="//; s/"$//' | sort -u); do
+            [ -e "$f" ] || { echo "::error::index.html references a missing file: $f"; missing=1; }
+          done
+          exit $missing
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ env.ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Upload the site
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          for d in css js assets; do [ -d "$d" ] && cp -R "$d" _site/; done
+          # long-lived assets first, then the page, so a visitor never gets new HTML with old files missing
+          aws s3 sync _site/ "s3://${BUCKET}/" --delete --exclude "*.html" \
+            --cache-control "public, max-age=86400"
+          aws s3 sync _site/ "s3://${BUCKET}/" --exclude "*" --include "*.html" \
+            --cache-control "no-cache" --content-type "text/html; charset=utf-8"
+
+      - name: Refresh the CDN
+        run: |
+          DIST=$(aws cloudfront list-distributions \
+            --query "DistributionList.Items[?Origins.Items[0].DomainName=='${BUCKET}.s3.${AWS_REGION}.amazonaws.com'].Id | [0]" \
+            --output text)
+          aws cloudfront create-invalidation --distribution-id "$DIST" --paths "/*" --query Invalidation.Id --output text
+          DOMAIN=$(aws cloudfront get-distribution --id "$DIST" --query Distribution.DomainName --output text 2>/dev/null || true)
+          echo "Deployed. Live at https://${DOMAIN} within a few minutes." >> "$GITHUB_STEP_SUMMARY"
