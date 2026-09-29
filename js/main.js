@@ -82,9 +82,11 @@
     reveals.forEach((el) => el.classList.add("is-visible"));
   }
 
-  /* ---------- Demo form ---------- */
+  /* ---------- Demo form (Formspree) ---------- */
   const form = document.querySelector("[data-demo-form]");
   const success = document.querySelector("[data-form-success]");
+  const errorEl = document.querySelector("[data-form-error]");
+  const submitBtn = form?.querySelector("[data-submit-btn]");
 
   function setInvalid(fieldEl, invalid) {
     fieldEl?.classList.toggle("is-invalid", invalid);
@@ -94,12 +96,24 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   }
 
-  form?.addEventListener("submit", (e) => {
+  function showError(message) {
+    if (!errorEl) return;
+    errorEl.textContent = message;
+    errorEl.classList.remove("hidden");
+  }
+
+  function clearError() {
+    if (!errorEl) return;
+    errorEl.textContent = "";
+    errorEl.classList.add("hidden");
+  }
+
+  form?.addEventListener("submit", async (e) => {
     e.preventDefault();
+    clearError();
 
     const honeypot = form.querySelector("#company_url");
     if (honeypot && honeypot.value.trim() !== "") {
-      // Spam — fake quiet success
       form.reset();
       return;
     }
@@ -107,9 +121,9 @@
     const nameField = form.querySelector('[data-field="name"]');
     const emailField = form.querySelector('[data-field="email"]');
     const companyField = form.querySelector('[data-field="company"]');
-    const name = form.contact_name.value.trim();
-    const email = form.business_email.value.trim();
-    const company = form.company_name.value.trim();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const company = form.company.value.trim();
 
     let ok = true;
     if (!name) {
@@ -132,13 +146,56 @@
       return;
     }
 
-    // No backend yet — honest success state
-    form.classList.add("hidden");
-    success?.classList.add("is-visible");
+    const endpoint = form.getAttribute("action");
+    if (!endpoint) {
+      showError("Form endpoint is missing. Please try again later.");
+      return;
+    }
+
+    const originalLabel = submitBtn?.textContent;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+    }
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        form.reset();
+        form.classList.add("hidden");
+        success?.classList.add("is-visible");
+        return;
+      }
+
+      let message = "Something went wrong. Please try again or email hello@yora.health.";
+      try {
+        const data = await response.json();
+        if (data?.errors?.length) {
+          message = data.errors.map((err) => err.message).join(" ");
+        } else if (data?.error) {
+          message = data.error;
+        }
+      } catch (_) {
+        /* keep default message */
+      }
+      showError(message);
+    } catch (_) {
+      showError("Network error. Check your connection and try again.");
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel || "Submit demo request";
+      }
+    }
   });
 
-  ["contact_name", "business_email", "company_name"].forEach((id) => {
-    form?.querySelector("#" + id)?.addEventListener("input", (e) => {
+  ["name", "email", "company"].forEach((fieldName) => {
+    form?.querySelector(`[name="${fieldName}"]`)?.addEventListener("input", (e) => {
       const wrap = e.target.closest(".form-field");
       if (wrap?.classList.contains("is-invalid") && e.target.value.trim()) {
         setInvalid(wrap, false);

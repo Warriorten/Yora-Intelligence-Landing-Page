@@ -68,8 +68,8 @@ body {
 
 .display-italic {
   font-family: "Fraunces", Georgia, serif;
-  font-style: italic;
-  font-weight: 500;
+  font-style: normal;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
@@ -81,22 +81,57 @@ body {
   color: var(--yora-grass);
 }
 
-/* Buttons — sage like app Continue */
+.eyebrow--lg {
+  font-size: 0.9375rem;
+  letter-spacing: 0.12em;
+}
+
+@media (min-width: 640px) {
+  .eyebrow--lg {
+    font-size: 1.0625rem;
+  }
+}
+
+/* Logo */
+.yora-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--yora-heading);
+}
+
+.yora-logo__mark {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+}
+
+.yora-logo__text {
+  font-family: "Fraunces", Georgia, serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+
+/* Buttons — match app Continue */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.9rem 1.75rem;
+  padding: 0.875rem 1.75rem;
   background: var(--yora-sage);
   color: #fff;
   font-weight: 600;
-  font-size: 0.95rem;
-  border-radius: 0.85rem;
+  font-size: 0.9375rem;
+  border-radius: 1rem;
   border: none;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.15s ease;
   text-decoration: none;
+  box-shadow: 0 1px 2px rgba(26, 26, 26, 0.06);
 }
 
 .btn-primary:hover {
@@ -235,9 +270,9 @@ body.nav-open {
 
 .step-num {
   font-family: "Fraunces", Georgia, serif;
-  font-style: italic;
+  font-style: normal;
   font-size: 2rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--yora-sage);
   line-height: 1;
 }
@@ -274,6 +309,158 @@ body.nav-open {
   position: relative;
   display: inline-grid;
   place-items: center;
+}
+
+/* App-style score pills */
+.score-pill-grid {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.score-pill {
+  flex: 1 1 6rem;
+  min-width: 5.5rem;
+  border-radius: 0.85rem;
+  padding: 0.65rem 0.75rem;
+  text-align: center;
+}
+
+.score-pill--product {
+  background: rgba(130, 202, 157, 0.35);
+}
+
+.score-pill--verify {
+  background: rgba(130, 202, 157, 0.2);
+}
+
+.score-pill__label {
+  font-size: 0.6875rem;
+  color: var(--yora-muted);
+  font-weight: 500;
+}
+
+.score-pill__value {
+  margin-top: 0.15rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.score-pill--product .score-pill__value {
+  color: var(--yora-grass);
+}
+
+.score-pill--verify .score-pill__value {
+  color: var(--yora-sage-dark);
+}
+
+.score-card-app {
+  background: var(--yora-white);
+  border: 1px solid var(--yora-border);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.score-card-app__title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--yora-heading);
+}
+
+.score-card-app__meta {
+  font-size: 0.6875rem;
+  color: var(--yora-muted);
+  margin-top: 0.15rem;
+}
+
+/* Phone mockups */
+.phone-showcase {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.phone-frame {
+  width: min(220px, 72vw);
+  max-width: 100%;
+  border-radius: 2rem;
+  border: 3px solid var(--yora-ink);
+  background: #fff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+@media (max-width: 639px) {
+  .phone-frame--welcome {
+    width: min(260px, 78vw);
+  }
+
+  .hero {
+    padding: 2rem 0 2.5rem;
+  }
+
+  section.py-20 {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
+.phone-frame--welcome {
+  aspect-ratio: 9 / 19;
+  border: none;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  background: transparent;
+}
+
+.phone-frame--welcome .phone-screen-img {
+  border-radius: 2rem;
+}
+
+.phone-frame--result {
+  width: 200px;
+}
+
+.phone-screen-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.phone-screen-ui {
+  padding: 1.25rem 1rem 1.5rem;
+  background: var(--yora-white);
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-screen-ui .welcome-heading {
+  font-family: "Fraunces", Georgia, serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.35rem;
+  text-align: center;
+  color: var(--yora-heading);
+}
+
+.welcome-blob {
+  width: 7rem;
+  height: 7rem;
+  margin: 0.5rem auto 1rem;
+  border-radius: 50%;
+  background: var(--yora-cream);
+  display: grid;
+  place-items: center;
+}
+
+.welcome-blob img {
+  width: 5rem;
+  height: 5rem;
 }
 
 .media-thumb {
@@ -342,17 +529,6 @@ body.nav-open {
   width: 1px;
   height: 1px;
   overflow: hidden;
-}
-
-.phone-frame {
-  width: 260px;
-  max-width: 100%;
-  border-radius: 2rem;
-  border: 3px solid var(--yora-ink);
-  background: #fff;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  aspect-ratio: 9 / 19;
 }
 
 .phone-notch {

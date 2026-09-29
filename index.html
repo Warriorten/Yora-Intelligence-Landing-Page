@@ -59,16 +59,9 @@
 
     <header class="site-header sticky top-0 z-50 bg-yora-white/90 backdrop-blur-md" data-header>
       <div class="mx-auto max-w-content px-5 sm:px-8 flex items-center justify-between h-[4.25rem]">
-        <a href="#home" class="flex items-center gap-2.5" aria-label="Yora Home">
-          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-yora-yellow" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="10" r="5" fill="#3D9B6A" />
-              <circle cx="10" cy="9" r="0.8" fill="#1A1A1A" />
-              <circle cx="14" cy="9" r="0.8" fill="#1A1A1A" />
-              <path d="M10.5 12h3" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round" />
-            </svg>
-          </span>
-          <span class="font-display text-xl text-yora-heading tracking-tight">Yora</span>
+        <a href="#home" class="yora-logo" aria-label="Yora Home">
+          <img class="yora-logo__mark" src="assets/yora-mascot.svg" alt="" width="32" height="32" />
+          <span class="yora-logo__text">Yora</span>
         </a>
 
         <nav class="hidden lg:flex items-center gap-9" aria-label="Primary">
@@ -115,7 +108,7 @@
         <div class="mx-auto max-w-content px-5 sm:px-8">
           <div class="hero-grid">
             <div>
-              <p class="eyebrow mb-4">Yora Intelligence</p>
+              <p class="eyebrow eyebrow--lg mb-4">Yora Intelligence</p>
               <h1 class="display-italic text-4xl sm:text-5xl lg:text-[3.5rem] text-yora-heading leading-[1.1]">
                 Intelligence behind better supplement decisions.
               </h1>
@@ -123,22 +116,22 @@
                 Yora turns fragmented supplement data into structured product intelligence —
                 so healthcare, practitioner and supplement platforms can evaluate products with clarity.
               </p>
-              <div class="mt-8 flex flex-wrap items-center gap-3">
-                <a href="#demo" class="btn-primary">Request a Demo</a>
-                <a href="#intelligence" class="btn-secondary">See how it works</a>
+              <div class="mt-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
+                <a href="#demo" class="btn-primary w-full sm:w-auto">Request a Demo</a>
+                <a href="#intelligence" class="btn-secondary w-full sm:w-auto">See how it works</a>
               </div>
-              <dl class="mt-12 grid grid-cols-3 gap-4 max-w-lg">
-                <div>
+              <dl class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-4 max-w-lg">
+                <div class="border-b border-yora-border pb-3 sm:border-0 sm:pb-0">
                   <dt class="text-xs text-yora-muted uppercase tracking-wide">Architecture</dt>
-                  <dd class="mt-1 font-display text-2xl text-yora-heading">2 scores</dd>
+                  <dd class="mt-1 font-display text-xl sm:text-2xl text-yora-heading">2 scores</dd>
                 </div>
-                <div>
+                <div class="border-b border-yora-border pb-3 sm:border-0 sm:pb-0">
                   <dt class="text-xs text-yora-muted uppercase tracking-wide">Built for</dt>
-                  <dd class="mt-1 font-display text-2xl text-yora-heading">Enterprise</dd>
+                  <dd class="mt-1 font-display text-xl sm:text-2xl text-yora-heading">Enterprise</dd>
                 </div>
                 <div>
                   <dt class="text-xs text-yora-muted uppercase tracking-wide">Also</dt>
-                  <dd class="mt-1 font-display text-2xl text-yora-heading">Consumer</dd>
+                  <dd class="mt-1 font-display text-xl sm:text-2xl text-yora-heading">Consumer</dd>
                 </div>
               </dl>
             </div>
@@ -229,28 +222,22 @@
               <div class="card-soft p-6 sm:p-8">
                 <p class="tag mb-4">Two-score architecture</p>
                 <h3 class="text-lg font-semibold text-yora-heading mb-5">Independent dimensions</h3>
-                <div class="space-y-4">
-                  <div class="flex items-center gap-4 bg-yora-white rounded-2xl p-4">
-                    <div class="score-wrap shrink-0">
-                      <div class="score-ring" style="--pct: 82; --ring-color: #82ca9d" aria-hidden="true"></div>
-                      <span class="score-ring-inner">82</span>
+                <div class="score-card-app mb-4">
+                  <p class="score-card-app__title">Sample product</p>
+                  <p class="score-card-app__meta">Illustrative scores</p>
+                  <div class="score-pill-grid mt-3">
+                    <div class="score-pill score-pill--product">
+                      <p class="score-pill__label">Product</p>
+                      <p class="score-pill__value">82</p>
                     </div>
-                    <div>
-                      <p class="font-semibold text-yora-heading">Product Score</p>
-                      <p class="text-sm text-yora-muted">Formulation quality</p>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-4 bg-yora-white rounded-2xl p-4">
-                    <div class="score-wrap shrink-0">
-                      <div class="score-ring" style="--pct: 64; --ring-color: #3d9b6a" aria-hidden="true"></div>
-                      <span class="score-ring-inner">64</span>
-                    </div>
-                    <div>
-                      <p class="font-semibold text-yora-heading">Verification Score</p>
-                      <p class="text-sm text-yora-muted">Supporting evidence</p>
+                    <div class="score-pill score-pill--verify">
+                      <p class="score-pill__label">Verify</p>
+                      <p class="score-pill__value">64</p>
                     </div>
                   </div>
                 </div>
+                <p class="text-sm text-yora-muted"><strong class="text-yora-heading">Product Score</strong> — formulation quality</p>
+                <p class="text-sm text-yora-muted mt-1"><strong class="text-yora-heading">Verification Score</strong> — supporting evidence</p>
               </div>
             </aside>
           </div>
@@ -297,32 +284,21 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div class="absolute bottom-0 p-5 text-white">
                   <p class="text-xs uppercase tracking-wider text-white/70">Illustrative analysis</p>
-                  <h3 class="font-display text-xl italic mt-1">Omega-3 Ultra Complex</h3>
+                  <h3 class="font-display text-xl mt-1">Omega-3 Ultra Complex</h3>
                 </div>
               </div>
               <div class="p-6">
-                <div class="flex flex-wrap gap-8">
-                  <div class="flex items-center gap-3">
-                    <div class="score-wrap">
-                      <div class="score-ring" style="--pct: 88" aria-hidden="true"></div>
-                      <span class="score-ring-inner">88</span>
-                    </div>
-                    <div>
-                      <p class="text-sm font-semibold">Product Score</p>
-                      <p class="text-xs text-yora-muted">Formulation quality</p>
-                    </div>
+                <div class="score-pill-grid">
+                  <div class="score-pill score-pill--product">
+                    <p class="score-pill__label">Product</p>
+                    <p class="score-pill__value">88</p>
                   </div>
-                  <div class="flex items-center gap-3">
-                    <div class="score-wrap">
-                      <div class="score-ring" style="--pct: 71; --ring-color: #3d9b6a" aria-hidden="true"></div>
-                      <span class="score-ring-inner">71</span>
-                    </div>
-                    <div>
-                      <p class="text-sm font-semibold">Verification Score</p>
-                      <p class="text-xs text-yora-muted">Supporting evidence</p>
-                    </div>
+                  <div class="score-pill score-pill--verify">
+                    <p class="score-pill__label">Verify</p>
+                    <p class="score-pill__value">71</p>
                   </div>
                 </div>
+                <p class="mt-4 text-xs text-yora-muted">Product Score — formulation quality · Verification Score — supporting evidence</p>
                 <ul class="mt-6 space-y-2 text-sm text-yora-muted">
                   <li>✓ Forms and dosages mapped to normalized records</li>
                   <li>✓ Formulation completeness vs category benchmarks</li>
@@ -415,24 +391,36 @@
       <section id="app" class="py-20 md:py-28 band-cream">
         <div class="mx-auto max-w-content px-5 sm:px-8">
           <div class="grid gap-12 lg:grid-cols-2 items-center">
-            <div class="reveal order-2 lg:order-1 flex justify-center">
-              <div class="phone-frame" aria-hidden="true">
+            <div class="reveal order-2 lg:order-1 phone-showcase">
+              <div class="phone-frame phone-frame--welcome">
+                <img
+                  class="phone-screen-img"
+                  src="assets/images/app-welcome.png"
+                  alt="Yora app welcome screen with mascot and Continue button"
+                  width="390"
+                  height="844"
+                  loading="lazy"
+                />
+              </div>
+              <div class="phone-frame phone-frame--result hidden sm:block" aria-hidden="true">
                 <div class="phone-notch"></div>
-                <div class="px-5 pt-6 pb-6 h-full bg-yora-white flex flex-col items-center text-center">
-                  <div class="w-28 h-28 rounded-full bg-yora-cream flex items-center justify-center mb-4" aria-hidden="true">
-                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-                      <circle cx="32" cy="28" r="16" fill="#F5C518"/>
-                      <circle cx="26" cy="26" r="1.8" fill="#1A1A1A"/>
-                      <circle cx="38" cy="26" r="1.8" fill="#1A1A1A"/>
-                      <path d="M27 32c2 2 8 2 10 0" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round"/>
-                      <path d="M18 30c-6-2-8 4-4 8M46 30c6-2 8 4 4 8M28 44c-2 6 2 10 4 8M36 44c2 6-2 10-4 8" stroke="#3D9B6A" stroke-width="2.5" stroke-linecap="round"/>
-                    </svg>
+                <div class="phone-screen-ui">
+                  <p class="text-[10px] font-bold uppercase tracking-wider text-yora-grass">Scan result</p>
+                  <div class="score-card-app mt-3">
+                    <p class="score-card-app__title">Magnesium Complex</p>
+                    <p class="score-card-app__meta">Glycinate · 120 mg</p>
+                    <div class="score-pill-grid mt-3">
+                      <div class="score-pill score-pill--product">
+                        <p class="score-pill__label">Product</p>
+                        <p class="score-pill__value">79</p>
+                      </div>
+                      <div class="score-pill score-pill--verify">
+                        <p class="score-pill__label">Verify</p>
+                        <p class="score-pill__value">62</p>
+                      </div>
+                    </div>
                   </div>
-                  <p class="display-italic text-2xl text-yora-heading">Welcome!</p>
-                  <p class="mt-2 text-xs text-yora-muted leading-relaxed px-2">
-                    Yora shows you what’s inside your supplements so you know what truly supports your health.
-                  </p>
-                  <div class="mt-10 w-full rounded-xl bg-yora-sage text-white text-sm font-semibold py-3">Continue</div>
+                  <p class="mt-auto pt-6 text-[10px] text-center text-yora-muted">Powered by Yora Intelligence</p>
                 </div>
               </div>
             </div>
@@ -477,29 +465,36 @@
             <div class="reveal reveal-delay-1">
               <div class="rounded-2xl bg-yora-white p-6 sm:p-8 text-yora-ink">
                 <div class="form-success mb-4" data-form-success role="status" aria-live="polite">
-                  Thanks for your interest. This demo form is not connected to a live backend yet.
+                  Thanks — your demo request was sent. Andy and Tania will follow up soon.
                 </div>
+                <p class="form-error mb-4 text-sm text-red-600 hidden" data-form-error role="alert"></p>
 
-                <form data-demo-form novalidate>
+                <form
+                  data-demo-form
+                  action="https://formspree.io/f/mzezyrll"
+                  method="POST"
+                  novalidate
+                >
+                  <input type="hidden" name="_subject" value="Yora demo request" />
                   <div class="honeypot" aria-hidden="true">
                     <label for="company_url">Company website</label>
-                    <input type="text" id="company_url" name="company_url" tabindex="-1" autocomplete="off" />
+                    <input type="text" id="company_url" name="_gotcha" tabindex="-1" autocomplete="off" />
                   </div>
 
                   <div class="space-y-4">
                     <div class="form-field" data-field="name">
                       <label for="contact_name">Contact name *</label>
-                      <input type="text" id="contact_name" name="contact_name" autocomplete="name" required />
+                      <input type="text" id="contact_name" name="name" autocomplete="name" required />
                       <p class="error-msg">Please enter your name.</p>
                     </div>
                     <div class="form-field" data-field="email">
                       <label for="business_email">Business email *</label>
-                      <input type="email" id="business_email" name="business_email" autocomplete="email" required />
+                      <input type="email" id="business_email" name="email" autocomplete="email" required />
                       <p class="error-msg">Please enter a valid business email.</p>
                     </div>
                     <div class="form-field" data-field="company">
                       <label for="company_name">Company name *</label>
-                      <input type="text" id="company_name" name="company_name" autocomplete="organization" required />
+                      <input type="text" id="company_name" name="company" autocomplete="organization" required />
                       <p class="error-msg">Please enter your company name.</p>
                     </div>
                     <div class="form-field">
@@ -520,10 +515,10 @@
                     </div>
                     <div class="form-field">
                       <label for="explore">What would you like to explore?</label>
-                      <textarea id="explore" name="explore" rows="3"></textarea>
+                      <textarea id="explore" name="message" rows="3"></textarea>
                     </div>
                     <div class="flex items-start gap-3 text-sm">
-                      <input type="checkbox" id="marketing_consent" name="marketing_consent" class="mt-1" />
+                      <input type="checkbox" id="marketing_consent" name="marketing_consent" value="yes" class="mt-1" />
                       <label for="marketing_consent" class="text-yora-muted font-normal">
                         Optional: occasional product updates (separate from demo request).
                       </label>
@@ -531,7 +526,7 @@
                     <p class="text-xs text-yora-muted">
                       By submitting, you agree to our <a href="#privacy" class="underline text-yora-grass">Privacy Notice</a> (placeholder).
                     </p>
-                    <button type="submit" class="btn-primary w-full">Submit demo request</button>
+                    <button type="submit" class="btn-primary w-full" data-submit-btn>Submit demo request</button>
                   </div>
                 </form>
               </div>
@@ -545,7 +540,10 @@
       <div class="mx-auto max-w-content px-5 sm:px-8">
         <div class="grid gap-10 md:grid-cols-4">
           <div>
-            <a href="#home" class="font-display text-xl text-yora-heading">Yora</a>
+            <a href="#home" class="yora-logo">
+              <img class="yora-logo__mark" src="assets/yora-mascot.svg" alt="" width="28" height="28" />
+              <span class="yora-logo__text">Yora</span>
+            </a>
             <p class="mt-3 text-sm text-yora-muted">Intelligence behind better supplement decisions.</p>
           </div>
           <div>
