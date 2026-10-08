@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms of Use — Yora Health</title>
+    <meta name="description" content="Terms of use for the Yora Health website." />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              yora: {
+                white: "#FFFFFF",
+                cream: "#FFF9E6",
+                sage: "#82CA9D",
+                grass: "#3D9B6A",
+                ink: "#1A1A1A",
+                heading: "#222222",
+                muted: "#666666",
+                border: "#ECE8DF",
+              },
+            },
+            fontFamily: {
+              display: ["Fraunces", "Georgia", "serif"],
+              sans: ["DM Sans", "system-ui", "sans-serif"],
+            },
+            maxWidth: { content: "70rem" },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="bg-yora-white text-yora-ink font-sans antialiased">
+    <header class="border-b border-yora-border">
+      <div class="mx-auto max-w-content px-5 sm:px-8 flex items-center justify-between h-[4.25rem]">
+        <a href="index.html" class="yora-logo" aria-label="Yora Home">
+          <img class="yora-logo__mark" src="assets/yora-mascot.svg" alt="" width="32" height="32" />
+          <span class="yora-logo__text">Yora</span>
+        </a>
+        <a href="index.html#demo" class="btn-primary text-sm py-2.5 px-5">Request a Demo</a>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-3xl px-5 sm:px-8 py-16 md:py-24">
+      <p class="eyebrow mb-3">Legal</p>
+      <h1 class="display-italic text-3xl sm:text-4xl text-yora-heading">Terms of Use</h1>
+      <p class="mt-3 text-sm text-yora-muted">Last updated: October 2026</p>
+
+      <div class="mt-10 space-y-8 text-yora-muted leading-relaxed">
+        <section>
+          <h2 class="text-lg font-semibold text-yora-heading">Agreement</h2>
+          <p class="mt-2">
+            By using this website, you agree to these Terms of Use. If you do not agree, please do not use the site.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-yora-heading">Informational purpose</h2>
+          <p class="mt-2">
+            Content on this site describes Yora Intelligence and related products for general information.
+            It is not medical advice, a clinical recommendation, or a substitute for professional judgement.
+            Product Score and Verification Score are proprietary analytical outputs — not Health Canada ratings,
+            approvals or certifications.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-yora-heading">Intellectual property</h2>
+          <p class="mt-2">
+            Text, branding, graphics and other materials on this site are owned by Yora Health or its licensors.
+            You may not copy, modify or redistribute them without prior written permission, except for fair personal use
+            of publicly available pages.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-yora-heading">Demo requests</h2>
+          <p class="mt-2">
+            Submitting a demo request does not create a commercial contract. Any business relationship is governed by
+            separate agreements between you and Yora.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-yora-heading">Disclaimer</h2>
+          <p class="mt-2">
+            This website is provided “as is.” To the fullest extent permitted by law, Yora disclaims warranties of
+            accuracy, merchantability and fitness for a particular purpose. We are not liable for indirect or
+            consequential damages arising from use of this site.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-yora-heading">Changes</h2>
+          <p class="mt-2">
+            We may update these terms from time to time. Continued use of the site after changes means you accept the
+            revised terms. The “Last updated” date reflects the latest revision.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-yora-heading">Contact</h2>
+          <p class="mt-2">
+            Questions about these terms:
+            <a href="mailto:hello@yora.health" class="text-yora-grass underline">hello@yora.health</a>.
+          </p>
+        </section>
+      </div>
+
+      <p class="mt-12">
+        <a href="index.html" class="text-yora-grass font-medium hover:underline">← Back to Yora</a>
+      </p>
+    </main>
+
+    <footer class="border-t border-yora-border py-8">
+      <div class="mx-auto max-w-content px-5 sm:px-8 text-sm text-yora-muted flex flex-wrap justify-between gap-2">
+        <p>© <span data-year>2026</span> Yora Health</p>
+        <div class="flex gap-4">
+          <a href="privacy.html" class="hover:text-yora-grass">Privacy</a>
+          <a href="terms.html" class="hover:text-yora-grass">Terms</a>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.querySelectorAll("[data-year]").forEach(function (el) {
+        el.textContent = String(new Date().getFullYear());
+      });
+    </script>
+  </body>
+</html>

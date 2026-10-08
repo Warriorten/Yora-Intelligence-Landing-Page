@@ -49,7 +49,7 @@
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", (e) => {
       const id = anchor.getAttribute("href");
-      if (!id || id === "#" || id === "#privacy" || id === "#terms") return;
+      if (!id || id === "#") return;
       const target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
