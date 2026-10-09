@@ -1,0 +1,34 @@
+# Yora Health
+
+> Yora Health builds Yora Intelligence — supplement product intelligence that resolves products, normalizes ingredients and dosages, assesses formulation quality and verification evidence, and explains results for enterprise platforms and consumers.
+
+## About
+
+Yora helps healthcare, practitioner, retail, brand and AI platforms evaluate supplement products with clarity. At the centre is a two-score architecture: Product Score (formulation quality) and Verification Score (supporting evidence). These are proprietary analytical outputs — not Health Canada ratings, approvals or certifications.
+
+Pipeline: Resolve → Normalize → Assess → Explain.
+
+Geography / language: Canada-focused brand presence; site language English (en-CA).
+
+## Primary pages
+
+- [Home](https://yora.health/): Product overview, intelligence pipeline, evidence sources, validation dimensions, enterprise solutions, consumer app, FAQ, demo request
+- [FAQ](https://yora.health/#faq): Citable answers about Yora Intelligence, scores, audience, evidence sources, and medical-advice disclaimer
+- [Privacy Notice](https://yora.health/privacy.html): How enquiry and site data is handled
+- [Terms of Use](https://yora.health/terms.html): Website terms and informational disclaimers
+
+## Key facts for citation
+
+- Organization: Yora Health
+- Product: Yora Intelligence (enterprise APIs / workflows) and Yora Health App (consumer, coming soon)
+- Scores: Product Score and Verification Score are independent dimensions
+- Evidence sources referenced: Health Canada NHP monographs, LNHPD/NPN, NIH ODS, NIH/IOM Dietary Reference Intakes, NIH Dietary Supplement Label Database
+- Validation focus: product resolution, ingredient extraction, dosage extraction, confidence, explainability
+- Contact: hello@yora.health
+- Positioning: decision-support intelligence, not medical advice or a replacement for professional judgement
+- Important: Product Score and Verification Score are not Health Canada ratings, approvals or certifications
+
+## Optional
+
+- [Sitemap](https://yora.health/sitemap.xml)
+- [robots.txt](https://yora.health/robots.txt)

@@ -37,6 +37,11 @@ jobs:
       - name: Check the site before publishing
         run: |
           test -f index.html
+          test -f privacy.html
+          test -f terms.html
+          test -f robots.txt
+          test -f sitemap.xml
+          test -f llms.txt
           # every local file the page references must exist
           missing=0
           for f in $(grep -oE '(src|href)="[^"#:]+"' index.html | sed -E 's/^(src|href)="//; s/"$//' | sort -u); do
@@ -53,13 +58,24 @@ jobs:
       - name: Upload the site
         run: |
           mkdir -p _site
-          cp index.html _site/
+          cp index.html privacy.html terms.html _site/
+          for f in robots.txt sitemap.xml llms.txt; do [ -f "$f" ] && cp "$f" _site/; done
           for d in css js assets; do [ -d "$d" ] && cp -R "$d" _site/; done
           # long-lived assets first, then the page, so a visitor never gets new HTML with old files missing
           aws s3 sync _site/ "s3://${BUCKET}/" --delete --exclude "*.html" \
             --cache-control "public, max-age=86400"
           aws s3 sync _site/ "s3://${BUCKET}/" --exclude "*" --include "*.html" \
             --cache-control "no-cache" --content-type "text/html; charset=utf-8"
+          # text SEO/GEO files: short cache so crawlers pick up updates
+          for f in robots.txt sitemap.xml llms.txt; do
+            [ -f "_site/$f" ] || continue
+            ctype="text/plain; charset=utf-8"
+            case "$f" in
+              sitemap.xml) ctype="application/xml; charset=utf-8" ;;
+            esac
+            aws s3 cp "_site/$f" "s3://${BUCKET}/$f" \
+              --cache-control "public, max-age=3600" --content-type "$ctype"
+          done
 
       - name: Refresh the CDN
         run: |
