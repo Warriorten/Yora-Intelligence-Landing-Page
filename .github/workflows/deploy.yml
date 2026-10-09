@@ -4,9 +4,10 @@
 # repo (infra/environments/staging/landing.tf). No static AWS keys: the job assumes the
 # role through GitHub OIDC, and the role only trusts this repo's main branch.
 #
-# What is published: the site files only (index.html, css/, js/, assets/). docs/, README
-# and repo config stay in git. HTML is revalidated on every visit so a deploy is seen at
-# once; css/js/images are cached for a day (file names carry no hash).
+# What is published: the site files only (top-level *.html pages, css/, js/, assets/,
+# robots.txt, sitemap.xml, llms.txt). docs/, README and repo config stay in git.
+# HTML is revalidated on every visit so a deploy is seen at once; css/js/images are
+# cached for a day (file names carry no hash).
 
 name: Deploy
 
@@ -42,10 +43,12 @@ jobs:
           test -f robots.txt
           test -f sitemap.xml
           test -f llms.txt
-          # every local file the page references must exist
+          # every local file a page references must exist (all top-level pages)
           missing=0
-          for f in $(grep -oE '(src|href)="[^"#:]+"' index.html | sed -E 's/^(src|href)="//; s/"$//' | sort -u); do
-            [ -e "$f" ] || { echo "::error::index.html references a missing file: $f"; missing=1; }
+          for page in *.html; do
+            for f in $(grep -oE '(src|href)="[^"#:]+"' "$page" | sed -E 's/^(src|href)="//; s/"$//; s/[#?].*$//' | sort -u); do
+              [ -e "$f" ] || { echo "::error::$page references a missing file: $f"; missing=1; }
+            done
           done
           exit $missing
 
@@ -58,7 +61,7 @@ jobs:
       - name: Upload the site
         run: |
           mkdir -p _site
-          cp index.html privacy.html terms.html _site/
+          cp *.html _site/
           for f in robots.txt sitemap.xml llms.txt; do [ -f "$f" ] && cp "$f" _site/; done
           for d in css js assets; do [ -d "$d" ] && cp -R "$d" _site/; done
           # long-lived assets first, then the page, so a visitor never gets new HTML with old files missing

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yora Intelligence — API reference</title>
+    <meta
+      name="description"
+      content="Reference for the Yora Intelligence API: barcode in, explainable supplement intelligence out. Products, scores, enrichment, certifications, verification — with live examples."
+    />
+    <meta property="og:title" content="Yora Intelligence — API reference" />
+    <meta
+      property="og:description"
+      content="Resolve a barcode to a product, its composition, risks, benefits and two auditable scores. Try every endpoint from this page."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              yora: {
+                white: "#FFFFFF",
+                cream: "#FFF9E6",
+                sage: "#82CA9D",
+                "sage-dark": "#6BB887",
+                grass: "#3D9B6A",
+                yellow: "#F5C518",
+                ink: "#1A1A1A",
+                heading: "#222222",
+                muted: "#666666",
+                border: "#ECE8DF",
+                surface: "#FAF7F0",
+              },
+            },
+            fontFamily: {
+              display: ["Fraunces", "Georgia", "serif"],
+              sans: ["DM Sans", "system-ui", "sans-serif"],
+            },
+            maxWidth: {
+              content: "70rem",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/api.css" />
+  </head>
+  <body class="bg-yora-white text-yora-ink font-sans antialiased">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header sticky top-0 z-50 bg-yora-white/90 backdrop-blur-md" data-header>
+      <div class="mx-auto max-w-content px-5 sm:px-8 flex items-center justify-between h-[4.25rem]">
+        <a href="index.html" class="yora-logo" aria-label="Yora Home">
+          <img class="yora-logo__mark" src="assets/yora-mascot.svg" alt="" width="32" height="32" />
+          <span class="yora-logo__text">Yora</span>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-7" aria-label="Primary">
+          <a href="index.html#about" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">About</a>
+          <a href="index.html#intelligence" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">Intelligence</a>
+          <a href="index.html#evidence" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">Evidence</a>
+          <a href="index.html#validation" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">Validation</a>
+          <a href="index.html#solutions" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">Solutions</a>
+          <a href="index.html#app" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">App</a>
+          <a href="api.html" class="text-sm text-yora-ink font-semibold" aria-current="page">API</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <a href="index.html#demo" class="btn-primary hidden sm:inline-flex text-sm py-2.5 px-5">Request a Demo</a>
+          <button
+            type="button"
+            class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-yora-border"
+            data-nav-toggle
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            aria-label="Open menu"
+          >
+            <svg class="h-5 w-5" data-icon-open fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+            <svg class="h-5 w-5 hidden" data-icon-close fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-nav" class="nav-panel lg:hidden border-t border-yora-border bg-yora-white" data-nav-panel>
+        <nav class="mx-auto max-w-content px-5 py-4 flex flex-col gap-1" aria-label="Mobile">
+          <a href="index.html#about" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>About</a>
+          <a href="index.html#intelligence" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>Intelligence</a>
+          <a href="index.html#evidence" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>Evidence</a>
+          <a href="index.html#validation" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>Validation</a>
+          <a href="index.html#solutions" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>Solutions</a>
+          <a href="index.html#app" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>App</a>
+          <a href="api.html" class="px-3 py-3 rounded-xl text-sm font-semibold bg-yora-cream" data-nav-link aria-current="page">API</a>
+          <a href="index.html#demo" class="btn-primary mt-2 w-full" data-nav-link>Request a Demo</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <h1 class="sr-only">Yora Intelligence API reference</h1>
+      <section class="api-reference" aria-label="API reference">
+        <!-- Not id="api-reference": the Scalar bundle auto-mounts an empty instance into any element with that id. -->
+        <div id="yora-api-reference"></div>
+        <noscript>
+          <div class="api-noscript mx-auto max-w-content px-5 sm:px-8 py-10">
+            <p class="text-yora-muted">
+              The interactive reference needs JavaScript. The three calls that cover most integrations:
+            </p>
+<pre>
+# 1. Full product profile: identity, composition, benefits, risks, certifications
+curl "https://api.yoraintelligence.com/v1/product/733739038906" -H "X-API-Key: $YORA_API_KEY"
+
+# 2. The two scores, one jurisdiction
+curl "https://api.yoraintelligence.com/v1/score/733739038906?region=CA" -H "X-API-Key: $YORA_API_KEY"
+
+# 3. The same profile as a stream, stage by stage (for interactive UIs)
+curl -N "https://api.yoraintelligence.com/v1/product/733739038906/stream" -H "X-API-Key: $YORA_API_KEY"
+</pre>
+            <p class="mt-4 text-sm text-yora-muted">
+              The full specification, with every endpoint, parameter, error and example response, is the OpenAPI
+              document at <a class="text-yora-grass" href="https://api.yoraintelligence.com/public/openapi.json">api.yoraintelligence.com/public/openapi.json</a>.
+            </p>
+          </div>
+        </noscript>
+      </section>
+    </main>
+
+    <footer class="bg-yora-white border-t border-yora-border py-14">
+      <div class="mx-auto max-w-content px-5 sm:px-8">
+        <div class="grid gap-10 md:grid-cols-4">
+          <div>
+            <a href="index.html" class="yora-logo">
+              <img class="yora-logo__mark" src="assets/yora-mascot.svg" alt="" width="28" height="28" />
+              <span class="yora-logo__text">Yora</span>
+            </a>
+            <p class="mt-3 text-sm text-yora-muted">Intelligence behind better supplement decisions.</p>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-yora-muted mb-3">Navigate</p>
+            <ul class="space-y-2 text-sm text-yora-heading">
+              <li><a href="index.html#about" class="hover:text-yora-grass">About</a></li>
+              <li><a href="index.html#intelligence" class="hover:text-yora-grass">Intelligence</a></li>
+              <li><a href="index.html#evidence" class="hover:text-yora-grass">Evidence</a></li>
+              <li><a href="index.html#validation" class="hover:text-yora-grass">Validation</a></li>
+              <li><a href="index.html#solutions" class="hover:text-yora-grass">Solutions</a></li>
+              <li><a href="index.html#app" class="hover:text-yora-grass">App</a></li>
+              <li><a href="api.html" class="hover:text-yora-grass">API reference</a></li>
+              <li><a href="index.html#demo" class="hover:text-yora-grass">Request a Demo</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-yora-muted mb-3">Legal</p>
+            <ul class="space-y-2 text-sm">
+              <li><a href="privacy.html" class="hover:text-yora-grass">Privacy</a></li>
+              <li><a href="terms.html" class="hover:text-yora-grass">Terms</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-yora-muted mb-3">Contact</p>
+            <a href="mailto:hello@yora.health" class="text-sm hover:text-yora-grass">hello@yora.health</a>
+          </div>
+        </div>
+        <div class="mt-10 pt-6 border-t border-yora-border text-sm text-yora-muted flex flex-wrap justify-between gap-2">
+          <p>© <span data-year>2026</span> Yora Health</p>
+          <p>Supplement intelligence, redefined.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <!-- Scalar API reference, self-hosted copy (js/scalar.standalone.js, version in its first line).
+         No CDN: the site's Content-Security-Policy allows scripts from this origin only. -->
+    <script src="js/scalar.standalone.js"></script>
+    <script>
+      (function () {
+        var SPEC_URL = "https://api.yoraintelligence.com/public/openapi.json";
+        // Local preview only: http://localhost:8080/api.html?spec=http://localhost:8000/public/openapi.json
+        var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+        var override = local ? new URLSearchParams(location.search).get("spec") : null;
+        Scalar.createApiReference("#yora-api-reference", {
+          url: override || SPEC_URL,
+          // Requests go straight to the API (it allows this origin); never through a third-party proxy.
+          proxyUrl: "",
+          layout: "modern",
+          theme: "none", // colours and fonts come from css/api.css
+          withDefaultFonts: false, // no font downloads from scalar.com
+          hideClientButton: true,
+          showDeveloperTools: "never", // no Scalar toolbar (Configure / Share / Deploy)
+          agent: { disabled: true }, // no "Ask AI" (it would talk to scalar.com)
+          hideDarkModeToggle: true,
+          forceDarkModeState: "light",
+          hideDownloadButton: false,
+          documentDownloadType: "json",
+          defaultOpenAllTags: false,
+          defaultHttpClient: { targetKey: "shell", clientKey: "curl" },
+          persistAuth: false, // a pasted key lives in this tab only
+          authentication: { preferredSecurityScheme: "ApiKeyAuth" },
+          metaData: { title: "Yora Intelligence — API reference" },
+        });
+      })();
+    </script>
+  </body>
+</html>

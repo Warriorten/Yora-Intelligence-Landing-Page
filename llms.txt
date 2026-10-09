@@ -13,6 +13,7 @@ Geography / language: Canada-focused brand presence; site language English (en-C
 ## Primary pages
 
 - [Home](https://yora.health/): Product overview, intelligence pipeline, evidence sources, validation dimensions, enterprise solutions, consumer app, FAQ, demo request
+- [API reference](https://yora.health/api.html): Yora Intelligence API docs (products, scores, enrichment, verification)
 - [FAQ](https://yora.health/#faq): Citable answers about Yora Intelligence, scores, audience, evidence sources, and medical-advice disclaimer
 - [Privacy Notice](https://yora.health/privacy.html): How enquiry and site data is handled
 - [Terms of Use](https://yora.health/terms.html): Website terms and informational disclaimers
