@@ -1,0 +1,79 @@
+/* Yora Landing - API reference page (Scalar, self-hosted) in the landing palette.
+   Scalar reads its look from CSS variables; `theme: "none"` in the page config leaves them
+   to us. Selectors carry an extra `html body` so they beat Scalar's own defaults, which are
+   injected into <head> after this stylesheet. */
+
+html body .scalar-app,
+html body .light-mode,
+html body .scalar-api-reference {
+  --scalar-font: "DM Sans", system-ui, sans-serif;
+  --scalar-font-code: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --scalar-color-1: var(--yora-ink);
+  --scalar-color-2: #444444;
+  --scalar-color-3: var(--yora-muted);
+  --scalar-color-accent: var(--yora-grass);
+  --scalar-link-color: var(--yora-grass);
+
+  --scalar-background-1: var(--yora-white);
+  --scalar-background-2: var(--yora-surface);
+  --scalar-background-3: #f3efe6;
+  --scalar-background-accent: #e9f5ee;
+  --scalar-border-color: var(--yora-border);
+
+  --scalar-button-1: var(--yora-sage);
+  --scalar-button-1-color: #ffffff;
+  --scalar-button-1-hover: var(--yora-sage-dark);
+
+  --scalar-sidebar-background-1: var(--yora-surface);
+  --scalar-sidebar-color-1: var(--yora-ink);
+  --scalar-sidebar-color-2: var(--yora-muted);
+  --scalar-sidebar-color-active: var(--yora-grass);
+  --scalar-sidebar-item-hover-background: var(--yora-cream);
+  --scalar-sidebar-item-hover-color: var(--yora-ink);
+  --scalar-sidebar-item-active-background: #e9f5ee;
+  --scalar-sidebar-border-color: var(--yora-border);
+  --scalar-sidebar-search-background: var(--yora-white);
+  --scalar-sidebar-search-border-color: var(--yora-border);
+  --scalar-sidebar-search-color: var(--yora-muted);
+
+  --scalar-color-green: var(--yora-grass);
+  --scalar-color-yellow: #b88a00;
+
+  --scalar-radius: 0.5rem;
+  --scalar-radius-lg: 0.75rem;
+  --scalar-radius-xl: 1rem;
+
+  /* The site header stays above the page; Scalar offsets its sticky sidebar by this. */
+  --scalar-custom-header-height: var(--header-h);
+}
+
+/* Headings in the reference use the display serif of the rest of the site. */
+html body .scalar-app h1,
+html body .scalar-app .section-header,
+html body .scalar-app .introduction-section h1 {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+/* The reference needs the whole width; no max-width container here. */
+.api-reference {
+  min-height: 60vh;
+}
+
+/* Fallback when scripts are off: the three starter calls, readable as plain text. */
+.api-noscript pre {
+  background: var(--yora-ink);
+  color: #f4f1ea;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+/* Scalar's sidebar footer: "Powered by Scalar", "Generate MCP" and the theme switch all lead
+   to scalar.com, which this page does not use. The MIT licence is kept in the bundle header. */
+html body .scalar-app .darklight-reference {
+  display: none;
+}
