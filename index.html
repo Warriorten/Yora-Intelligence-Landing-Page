@@ -3,18 +3,152 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yora Health — Supplement Intelligence</title>
+    <title>Yora Health — Supplement Product Intelligence for Enterprise</title>
     <meta
       name="description"
-      content="Intelligence behind better supplement decisions. Yora resolves, normalizes, assesses and explains supplement products for enterprise platforms and consumers."
+      content="Yora Intelligence resolves, normalizes, assesses and explains supplement products. Two independent scores — Product Score and Verification Score — for healthcare, practitioner and commerce platforms."
     />
-    <meta property="og:title" content="Yora Health — Supplement Intelligence" />
+    <meta
+      name="keywords"
+      content="supplement intelligence, product score, verification score, dietary supplement API, Health Canada NHP, ingredient normalization, formulation quality, Yora Health"
+    />
+    <meta name="author" content="Yora Health" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#82CA9D" />
+    <link rel="canonical" href="https://yora.health/" />
+    <link rel="alternate" type="text/plain" title="LLM content guide" href="https://yora.health/llms.txt" />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Yora Health" />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yora.health/" />
+    <meta property="og:title" content="Yora Health — Supplement Product Intelligence" />
     <meta
       property="og:description"
-      content="One intelligence platform. Multiple applications. Deeper insight into supplement quality."
+      content="Resolve, normalize, assess and explain supplement products. Product Score and Verification Score for enterprise platforms."
     />
-    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://yora.health/assets/images/hero-nature-science.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="720" />
+    <meta property="og:image:alt" content="Computer analysis beside laboratory science — Yora supplement intelligence" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Yora Health — Supplement Product Intelligence" />
+    <meta
+      name="twitter:description"
+      content="Resolve, normalize, assess and explain supplement products with Product Score and Verification Score."
+    />
+    <meta name="twitter:image" content="https://yora.health/assets/images/hero-nature-science.png" />
+    <meta name="twitter:image:alt" content="Computer analysis beside laboratory science — Yora supplement intelligence" />
+
+    <!-- GEO / locale -->
+    <meta name="geo.region" content="CA" />
+    <meta name="geo.placename" content="Canada" />
+    <meta name="language" content="en-CA" />
+
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/yora-mascot.svg" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://yora.health/#organization",
+            "name": "Yora Health",
+            "url": "https://yora.health/",
+            "logo": "https://yora.health/assets/yora-mascot.svg",
+            "email": "hello@yora.health",
+            "description": "Yora Health builds Yora Intelligence — supplement product intelligence that resolves products, normalizes ingredients, assesses formulation quality and verification evidence, and explains results for enterprise platforms and consumers.",
+            "sameAs": []
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://yora.health/#website",
+            "url": "https://yora.health/",
+            "name": "Yora Health",
+            "description": "Supplement product intelligence for enterprise and consumers.",
+            "publisher": { "@id": "https://yora.health/#organization" },
+            "inLanguage": "en-CA"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://yora.health/#webpage",
+            "url": "https://yora.health/",
+            "name": "Yora Health — Supplement Product Intelligence for Enterprise",
+            "isPartOf": { "@id": "https://yora.health/#website" },
+            "about": { "@id": "https://yora.health/#organization" },
+            "description": "Yora Intelligence resolves, normalizes, assesses and explains supplement products with Product Score and Verification Score.",
+            "inLanguage": "en-CA"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://yora.health/#yora-intelligence",
+            "name": "Yora Intelligence",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "url": "https://yora.health/#intelligence",
+            "description": "Enterprise supplement product intelligence: Resolve → Normalize → Assess → Explain, with independent Product Score and Verification Score.",
+            "provider": { "@id": "https://yora.health/#organization" },
+            "offers": {
+              "@type": "Offer",
+              "availability": "https://schema.org/OnlineOnly",
+              "url": "https://yora.health/#demo"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://yora.health/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is Yora Intelligence?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yora Intelligence is a supplement product intelligence platform that resolves products, normalizes ingredients and dosages, assesses formulation quality and verification evidence, and explains results for enterprise platforms and consumers."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the difference between Product Score and Verification Score?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Product Score reflects formulation quality. Verification Score reflects supporting evidence. They are independent proprietary analytical outputs so certifications alone are never mistaken for superior formulation. They are not Health Canada ratings, approvals or certifications."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Who is Yora built for?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yora is built for healthcare, practitioner, retail and marketplace, brand and commerce, and AI or health-tech platforms that need explainable supplement product intelligence. A consumer app powered by the same engine is coming soon."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What evidence sources does Yora draw on?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yora references Health Canada NHP monographs, LNHPD/NPN, NIH Office of Dietary Supplements, NIH/IOM Dietary Reference Intakes, and the NIH Dietary Supplement Label Database, then applies proprietary analysis for source-traceable, confidence-aware outputs."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is Yora medical advice?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Yora provides decision-support intelligence, not medical advice or a replacement for professional judgement."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -71,6 +205,7 @@
           <a href="#validation" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">Validation</a>
           <a href="#solutions" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">Solutions</a>
           <a href="#app" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">App</a>
+          <a href="#faq" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">FAQ</a>
           <a href="api.html" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">API</a>
         </nav>
 
@@ -102,6 +237,7 @@
           <a href="#validation" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>Validation</a>
           <a href="#solutions" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>Solutions</a>
           <a href="#app" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>App</a>
+          <a href="#faq" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>FAQ</a>
           <a href="api.html" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>API</a>
           <a href="#demo" class="btn-primary mt-2 w-full" data-nav-link>Request a Demo</a>
         </nav>
@@ -145,10 +281,11 @@
             <div class="hero-visual reveal">
               <img
                 src="assets/images/hero-nature-science.png"
-                alt="Computer analysis beside laboratory science"
-                width="1200"
-                height="900"
+                alt="Yora Intelligence: computer analysis beside laboratory science for supplement product evaluation"
+                width="1280"
+                height="720"
                 fetchpriority="high"
+                decoding="async"
               />
             </div>
           </div>
@@ -464,7 +601,7 @@
           <div class="mt-14 grid gap-5 sm:grid-cols-2">
             <article class="card-soft p-0 overflow-hidden reveal">
               <div class="media-frame h-40 rounded-none">
-                <img class="media-thumb" src="assets/images/solution-retail.jpg" alt="" loading="lazy" />
+                <img class="media-thumb" src="assets/images/solution-retail.jpg" alt="Retail and marketplace supplement shelves" loading="lazy" />
               </div>
               <div class="p-6">
                 <p class="text-xs font-semibold uppercase tracking-wider text-yora-grass">Marketplaces &amp; retailers</p>
@@ -474,7 +611,7 @@
             </article>
             <article class="card-soft p-0 overflow-hidden reveal reveal-delay-1">
               <div class="media-frame h-40 rounded-none">
-                <img class="media-thumb" src="assets/images/solution-clinical.jpg" alt="" loading="lazy" />
+                <img class="media-thumb" src="assets/images/solution-clinical.jpg" alt="Practitioner reviewing health product information" loading="lazy" />
               </div>
               <div class="p-6">
                 <p class="text-xs font-semibold uppercase tracking-wider text-yora-grass">Practitioners</p>
@@ -484,7 +621,7 @@
             </article>
             <article class="card-soft p-0 overflow-hidden reveal reveal-delay-2">
               <div class="media-frame h-40 rounded-none">
-                <img class="media-thumb" src="assets/images/solution-commerce.jpg" alt="" loading="lazy" />
+                <img class="media-thumb" src="assets/images/solution-commerce.jpg" alt="Supplement commerce and brand packaging" loading="lazy" />
               </div>
               <div class="p-6">
                 <p class="text-xs font-semibold uppercase tracking-wider text-yora-grass">Brands &amp; commerce</p>
@@ -494,7 +631,7 @@
             </article>
             <article class="card-soft p-0 overflow-hidden reveal reveal-delay-3">
               <div class="media-frame h-40 rounded-none">
-                <img class="media-thumb" src="assets/images/solution-ai.jpg" alt="" loading="lazy" />
+                <img class="media-thumb" src="assets/images/solution-ai.jpg" alt="AI and data infrastructure for health platforms" loading="lazy" />
               </div>
               <div class="p-6">
                 <p class="text-xs font-semibold uppercase tracking-wider text-yora-grass">AI &amp; health tech</p>
@@ -566,6 +703,63 @@
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ — SEO / GEO citation surface -->
+      <section id="faq" class="py-20 md:py-28" aria-labelledby="faq-heading">
+        <div class="mx-auto max-w-content px-5 sm:px-8">
+          <div class="max-w-2xl reveal">
+            <p class="eyebrow mb-3">FAQ</p>
+            <h2 id="faq-heading" class="display-italic text-3xl sm:text-4xl text-yora-heading leading-tight">
+              Clear answers about Yora Intelligence.
+            </h2>
+            <p class="mt-4 text-yora-muted leading-relaxed text-lg">
+              Short, citable facts for teams evaluating supplement product intelligence.
+            </p>
+          </div>
+
+          <div class="mt-12 max-w-3xl space-y-3 reveal">
+            <details class="faq-item">
+              <summary>What is Yora Intelligence?</summary>
+              <p>
+                Yora Intelligence is a supplement product intelligence platform that resolves products, normalizes
+                ingredients and dosages, assesses formulation quality and verification evidence, and explains results
+                for enterprise platforms and consumers. Pipeline: Resolve → Normalize → Assess → Explain.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary>What is the difference between Product Score and Verification Score?</summary>
+              <p>
+                Product Score reflects formulation quality. Verification Score reflects supporting evidence. They are
+                independent proprietary analytical outputs — so certifications alone are never mistaken for superior
+                formulation. They are not Health Canada ratings, approvals or certifications.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary>Who is Yora built for?</summary>
+              <p>
+                Healthcare, practitioner, retail and marketplace, brand and commerce, and AI or health-tech platforms
+                that need explainable supplement product intelligence. A consumer app powered by the same engine is
+                coming soon.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary>What evidence sources does Yora draw on?</summary>
+              <p>
+                Recognized references include Health Canada NHP monographs, LNHPD/NPN, NIH Office of Dietary Supplements,
+                NIH/IOM Dietary Reference Intakes, and the NIH Dietary Supplement Label Database. Yora then applies
+                proprietary analysis for source-traceable, confidence-aware outputs.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary>Is Yora medical advice?</summary>
+              <p>
+                No. Yora provides decision-support intelligence — not medical advice or a replacement for professional
+                judgement.
+              </p>
+            </details>
           </div>
         </div>
       </section>
@@ -679,6 +873,7 @@
               <li><a href="#validation" class="hover:text-yora-grass">Validation</a></li>
               <li><a href="#solutions" class="hover:text-yora-grass">Solutions</a></li>
               <li><a href="#app" class="hover:text-yora-grass">App</a></li>
+              <li><a href="#faq" class="hover:text-yora-grass">FAQ</a></li>
               <li><a href="api.html" class="hover:text-yora-grass">API reference</a></li>
               <li><a href="#demo" class="hover:text-yora-grass">Request a Demo</a></li>
             </ul>
@@ -688,11 +883,14 @@
             <ul class="space-y-2 text-sm">
               <li><a href="privacy.html" class="hover:text-yora-grass">Privacy</a></li>
               <li><a href="terms.html" class="hover:text-yora-grass">Terms</a></li>
+              <li><a href="llms.txt" class="hover:text-yora-grass">llms.txt</a></li>
+              <li><a href="sitemap.xml" class="hover:text-yora-grass">Sitemap</a></li>
             </ul>
           </div>
           <div>
             <p class="text-xs font-semibold uppercase tracking-wider text-yora-muted mb-3">Contact</p>
             <a href="mailto:hello@yora.health" class="text-sm hover:text-yora-grass">hello@yora.health</a>
+            <p class="mt-3 text-xs text-yora-muted">Canada · English</p>
           </div>
         </div>
         <div class="mt-10 pt-6 border-t border-yora-border text-sm text-yora-muted flex flex-wrap justify-between gap-2">
