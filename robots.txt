@@ -1,4 +1,4 @@
-# Yora Health — https://yora.health
+# Yora Intelligence — https://www.yoraintelligence.com
 User-agent: *
 Allow: /
 
@@ -48,4 +48,4 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
-Sitemap: https://yora.health/sitemap.xml
+Sitemap: https://www.yoraintelligence.com/sitemap.xml
