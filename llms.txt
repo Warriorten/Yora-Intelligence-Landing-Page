@@ -13,6 +13,7 @@ Geography / language: Canada-focused brand presence; site language English (en-C
 ## Primary pages
 
 - [Home](https://www.yoraintelligence.com/): Product overview, intelligence pipeline, evidence sources, validation dimensions, enterprise solutions, consumer app, FAQ, demo request
+- [Try it (live demo)](https://www.yoraintelligence.com/app.html): Scan or enter a supplement barcode and get Product Score and Verification Score with explanations, powered by Yora Intelligence
 - [API reference](https://www.yoraintelligence.com/api.html): Yora Intelligence API docs (products, scores, enrichment, verification)
 - [FAQ](https://www.yoraintelligence.com/#faq): Citable answers about Yora Intelligence, scores, audience, evidence sources, and medical-advice disclaimer
 - [Privacy Notice](https://www.yoraintelligence.com/privacy.html): How enquiry and site data is handled
