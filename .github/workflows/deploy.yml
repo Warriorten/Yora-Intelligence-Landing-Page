@@ -4,9 +4,10 @@
 # repo (infra/environments/staging/landing.tf). No static AWS keys: the job assumes the
 # role through GitHub OIDC, and the role only trusts this repo's main branch.
 #
-# What is published: the site files only (top-level *.html pages, css/, js/, assets/). docs/, README
-# and repo config stay in git. HTML is revalidated on every visit so a deploy is seen at
-# once; css/js/images are cached for a day (file names carry no hash).
+# What is published: the site files only (top-level *.html pages, css/, js/, assets/,
+# robots.txt, sitemap.xml, llms.txt). docs/, README and repo config stay in git.
+# HTML is revalidated on every visit so a deploy is seen at once; css/js/images are
+# cached for a day (file names carry no hash).
 
 name: Deploy
 
@@ -37,7 +38,12 @@ jobs:
       - name: Check the site before publishing
         run: |
           test -f index.html
-          # every local file a page references must exist (all top-level pages: index, privacy, terms, ...)
+          test -f privacy.html
+          test -f terms.html
+          test -f robots.txt
+          test -f sitemap.xml
+          test -f llms.txt
+          # every local file a page references must exist (all top-level pages)
           missing=0
           for page in *.html; do
             for f in $(grep -oE '(src|href)="[^"#:]+"' "$page" | sed -E 's/^(src|href)="//; s/"$//; s/[#?].*$//' | sort -u); do
@@ -56,12 +62,23 @@ jobs:
         run: |
           mkdir -p _site
           cp *.html _site/
+          for f in robots.txt sitemap.xml llms.txt; do [ -f "$f" ] && cp "$f" _site/; done
           for d in css js assets; do [ -d "$d" ] && cp -R "$d" _site/; done
           # long-lived assets first, then the page, so a visitor never gets new HTML with old files missing
           aws s3 sync _site/ "s3://${BUCKET}/" --delete --exclude "*.html" \
             --cache-control "public, max-age=86400"
           aws s3 sync _site/ "s3://${BUCKET}/" --exclude "*" --include "*.html" \
             --cache-control "no-cache" --content-type "text/html; charset=utf-8"
+          # text SEO/GEO files: short cache so crawlers pick up updates
+          for f in robots.txt sitemap.xml llms.txt; do
+            [ -f "_site/$f" ] || continue
+            ctype="text/plain; charset=utf-8"
+            case "$f" in
+              sitemap.xml) ctype="application/xml; charset=utf-8" ;;
+            esac
+            aws s3 cp "_site/$f" "s3://${BUCKET}/$f" \
+              --cache-control "public, max-age=3600" --content-type "$ctype"
+          done
 
       - name: Refresh the CDN
         run: |

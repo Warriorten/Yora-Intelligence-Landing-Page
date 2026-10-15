@@ -590,3 +590,42 @@ body.nav-open {
   background: var(--yora-ink);
   color: #fff;
 }
+
+/* FAQ */
+.faq-item {
+  border: 1px solid var(--yora-border);
+  border-radius: 1rem;
+  background: var(--yora-white);
+  padding: 0 1.25rem;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1.1rem 0;
+  font-weight: 600;
+  color: var(--yora-heading);
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  float: right;
+  font-weight: 500;
+  color: var(--yora-muted);
+}
+
+.faq-item[open] summary::after {
+  content: "–";
+}
+
+.faq-item p {
+  margin: 0 0 1.1rem;
+  padding-top: 0.15rem;
+  color: var(--yora-muted);
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
