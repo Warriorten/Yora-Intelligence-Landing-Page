@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Try Yora — Score a supplement</title>
+    <meta
+      name="description"
+      content="Enter or scan a supplement barcode and get Yora Intelligence's two scores — Product Score and Verification Score — with a clear explanation. Live demo."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#82CA9D" />
+    <link rel="canonical" href="https://www.yoraintelligence.com/app.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Yora Health" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.yoraintelligence.com/app.html" />
+    <meta property="og:title" content="Try Yora — Score a supplement" />
+    <meta
+      property="og:description"
+      content="Scan or enter a barcode and get Product Score and Verification Score with explanations. Live demo of Yora Intelligence."
+    />
+    <meta property="og:image" content="https://www.yoraintelligence.com/assets/images/hero-nature-science.png" />
+
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/yora-mascot.svg" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              yora: {
+                white: "#FFFFFF",
+                cream: "#FFF9E6",
+                sage: "#82CA9D",
+                "sage-dark": "#6BB887",
+                grass: "#3D9B6A",
+                yellow: "#F5C518",
+                ink: "#1A1A1A",
+                heading: "#222222",
+                muted: "#666666",
+                border: "#ECE8DF",
+                surface: "#FAF7F0",
+              },
+            },
+            fontFamily: {
+              display: ["Fraunces", "Georgia", "serif"],
+              sans: ["DM Sans", "system-ui", "sans-serif"],
+            },
+            maxWidth: { content: "70rem" },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/app.css?v=3" />
+  </head>
+  <body class="bg-yora-white text-yora-ink font-sans antialiased">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header sticky top-0 z-50 bg-yora-white/90 backdrop-blur-md" data-header>
+      <div class="mx-auto max-w-content px-5 sm:px-8 flex items-center justify-between h-[4.25rem]">
+        <a href="index.html" class="yora-logo" aria-label="Yora Home">
+          <img class="yora-logo__mark" src="assets/yora-mascot.svg" alt="" width="32" height="32" />
+          <span class="yora-logo__text">Yora</span>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-7" aria-label="Primary">
+          <a href="index.html#about" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">About</a>
+          <a href="index.html#intelligence" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">Intelligence</a>
+          <a href="index.html#solutions" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">Solutions</a>
+          <a href="app.html" class="text-sm text-yora-ink font-semibold" aria-current="page">Try it</a>
+          <a href="index.html#faq" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">FAQ</a>
+          <a href="api.html" class="text-sm text-yora-muted hover:text-yora-ink transition-colors">API</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <a href="index.html#demo" class="btn-primary hidden sm:inline-flex text-sm py-2.5 px-5">Request a Demo</a>
+          <button
+            type="button"
+            class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-yora-border"
+            data-nav-toggle
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            aria-label="Open menu"
+          >
+            <svg class="h-5 w-5" data-icon-open fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+            <svg class="h-5 w-5 hidden" data-icon-close fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-nav" class="nav-panel lg:hidden border-t border-yora-border bg-yora-white" data-nav-panel>
+        <nav class="mx-auto max-w-content px-5 py-4 flex flex-col gap-1" aria-label="Mobile">
+          <a href="index.html#about" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>About</a>
+          <a href="index.html#intelligence" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>Intelligence</a>
+          <a href="index.html#solutions" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>Solutions</a>
+          <a href="app.html" class="px-3 py-3 rounded-xl text-sm font-semibold bg-yora-cream" data-nav-link aria-current="page">Try it</a>
+          <a href="index.html#faq" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>FAQ</a>
+          <a href="api.html" class="px-3 py-3 rounded-xl text-sm hover:bg-yora-cream" data-nav-link>API</a>
+          <a href="index.html#demo" class="btn-primary mt-2 w-full" data-nav-link>Request a Demo</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Search hero -->
+      <section class="app-hero">
+        <div class="mx-auto max-w-content px-5 sm:px-8">
+          <div class="app-hero__inner">
+            <p class="eyebrow eyebrow--lg mb-3">Yora Intelligence · Live demo</p>
+            <h1 class="display-italic text-3xl sm:text-4xl lg:text-5xl text-yora-heading leading-[1.1]">
+              Score a supplement in seconds.
+            </h1>
+            <p class="mt-4 text-lg text-yora-muted leading-relaxed max-w-xl mx-auto">
+              Scan or enter a product barcode. Yora resolves the product, assesses it, and explains the result —
+              with two independent scores.
+            </p>
+
+            <form class="app-search" data-search-form novalidate>
+              <div class="app-search__row">
+                <span class="app-search__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10M8 7v10M12 7v10M16 7v10M20 7v10" />
+                  </svg>
+                </span>
+                <input
+                  id="barcode"
+                  name="barcode"
+                  type="text"
+                  inputmode="numeric"
+                  autocomplete="off"
+                  spellcheck="false"
+                  placeholder="Enter a product barcode…"
+                  aria-label="Product barcode"
+                  data-barcode
+                />
+                <button type="button" class="app-search__scan" data-scan-btn title="Scan with camera" aria-label="Scan a barcode with the camera">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V6a2 2 0 012-2h2M16 4h2a2 2 0 012 2v2M20 16v2a2 2 0 01-2 2h-2M8 20H6a2 2 0 01-2-2v-2M4 12h16" />
+                  </svg>
+                  <span class="hidden sm:inline">Scan</span>
+                </button>
+                <label class="app-search__photo" title="Use a label photo">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h2l2-2h6l2 2h2a2 2 0 012 2v11a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
+                    <circle cx="12" cy="13" r="3.5" />
+                  </svg>
+                  <span class="hidden sm:inline">Photo</span>
+                  <input type="file" accept="image/*" capture="environment" data-photo-input hidden />
+                </label>
+                <button type="submit" class="btn-primary app-search__go" data-go>Score it</button>
+              </div>
+              <div class="app-search__meta">
+                <div class="app-examples" data-examples>
+                  <span class="app-examples__label">Try:</span>
+                  <button type="button" class="chip" data-example="033674155905">Vitamin D3 — Nature's Way</button>
+                  <button type="button" class="chip" data-example="627765016413">Magnesium — Natural Factors</button>
+                  <button type="button" class="chip" data-example="068958082660">Omega-3 — Natural Factors</button>
+                </div>
+                <p class="app-lookups" data-lookups hidden></p>
+              </div>
+              <p class="app-status" data-status role="status" aria-live="polite" hidden></p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Staged progress -->
+      <section class="mx-auto max-w-content px-5 sm:px-8">
+        <ol class="app-stages" data-stages hidden>
+          <li data-stage="0"><span class="app-stages__dot"></span>Resolve</li>
+          <li data-stage="1"><span class="app-stages__dot"></span>Normalize</li>
+          <li data-stage="2"><span class="app-stages__dot"></span>Assess</li>
+          <li data-stage="3"><span class="app-stages__dot"></span>Explain</li>
+        </ol>
+      </section>
+
+      <!-- Result -->
+      <section class="mx-auto max-w-content px-5 sm:px-8 pb-20">
+        <div class="app-result" data-result hidden></div>
+
+        <!-- Not found / error template is rendered by JS into data-result -->
+      </section>
+
+      <!-- Standing disclaimer -->
+      <section class="mx-auto max-w-content px-5 sm:px-8 pb-24">
+        <p class="app-disclaimer">
+          Yora provides decision-support intelligence — not medical advice or a replacement for professional judgement.
+          Product Score and Verification Score are proprietary analytical outputs, not Health Canada ratings, approvals or certifications.
+        </p>
+      </section>
+    </main>
+
+    <!-- Camera scan overlay -->
+    <div class="app-scanner" data-scanner hidden aria-hidden="true">
+      <div class="app-scanner__panel">
+        <div class="app-scanner__head">
+          <p class="font-semibold">Scan a barcode</p>
+          <button type="button" class="app-scanner__close" data-scanner-close aria-label="Close scanner">&times;</button>
+        </div>
+        <video class="app-scanner__video" data-scanner-video playsinline muted></video>
+        <p class="app-scanner__hint" data-scanner-hint>Point the camera at the product barcode.</p>
+      </div>
+    </div>
+
+    <!-- Sign-in sheet — provider OAuth is Phase (b); until then, contact us. -->
+    <div class="app-sheet" data-signin hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="signin-title">
+      <div class="app-sheet__panel">
+        <button type="button" class="app-sheet__close" data-signin-close aria-label="Close">&times;</button>
+        <h2 id="signin-title" class="display-italic text-2xl text-yora-heading">You've used the 10 free lookups</h2>
+        <p class="mt-2 text-yora-muted">Sign-in is coming soon. Until then, contact us and we'll help you keep going.</p>
+        <a class="btn-primary app-sheet__cta" href="mailto:hello@yora.health">Contact us — hello@yora.health</a>
+      </div>
+    </div>
+
+    <footer class="bg-yora-white border-t border-yora-border py-14">
+      <div class="mx-auto max-w-content px-5 sm:px-8">
+        <div class="grid gap-10 md:grid-cols-4">
+          <div>
+            <a href="index.html" class="yora-logo">
+              <img class="yora-logo__mark" src="assets/yora-mascot.svg" alt="" width="28" height="28" />
+              <span class="yora-logo__text">Yora</span>
+            </a>
+            <p class="mt-3 text-sm text-yora-muted">Intelligence behind better supplement decisions.</p>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-yora-muted mb-3">Navigate</p>
+            <ul class="space-y-2 text-sm text-yora-heading">
+              <li><a href="index.html#about" class="hover:text-yora-grass">About</a></li>
+              <li><a href="index.html#intelligence" class="hover:text-yora-grass">Intelligence</a></li>
+              <li><a href="index.html#solutions" class="hover:text-yora-grass">Solutions</a></li>
+              <li><a href="app.html" class="hover:text-yora-grass">Try it</a></li>
+              <li><a href="index.html#faq" class="hover:text-yora-grass">FAQ</a></li>
+              <li><a href="api.html" class="hover:text-yora-grass">API reference</a></li>
+              <li><a href="index.html#demo" class="hover:text-yora-grass">Request a Demo</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-yora-muted mb-3">Legal</p>
+            <ul class="space-y-2 text-sm">
+              <li><a href="privacy.html" class="hover:text-yora-grass">Privacy</a></li>
+              <li><a href="terms.html" class="hover:text-yora-grass">Terms</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-yora-muted mb-3">Contact</p>
+            <a href="mailto:hello@yora.health" class="text-sm hover:text-yora-grass">hello@yora.health</a>
+          </div>
+        </div>
+        <div class="mt-10 pt-6 border-t border-yora-border text-sm text-yora-muted flex flex-wrap justify-between gap-2">
+          <p>© <span data-year>2026</span> Yora Health</p>
+          <p>Supplement intelligence, redefined.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/app.js?v=3"></script>
+  </body>
+</html>
