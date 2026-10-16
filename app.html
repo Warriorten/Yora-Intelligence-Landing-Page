@@ -10,18 +10,18 @@
     />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#82CA9D" />
-    <link rel="canonical" href="https://yora.health/app.html" />
+    <link rel="canonical" href="https://www.yoraintelligence.com/app.html" />
 
     <!-- Open Graph -->
     <meta property="og:site_name" content="Yora Health" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://yora.health/app.html" />
+    <meta property="og:url" content="https://www.yoraintelligence.com/app.html" />
     <meta property="og:title" content="Try Yora — Score a supplement" />
     <meta
       property="og:description"
       content="Scan or enter a barcode and get Product Score and Verification Score with explanations. Live demo of Yora Intelligence."
     />
-    <meta property="og:image" content="https://yora.health/assets/images/hero-nature-science.png" />
+    <meta property="og:image" content="https://www.yoraintelligence.com/assets/images/hero-nature-science.png" />
 
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="assets/yora-mascot.svg" />
@@ -62,7 +62,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/app.css?v=2" />
+    <link rel="stylesheet" href="css/app.css?v=3" />
   </head>
   <body class="bg-yora-white text-yora-ink font-sans antialiased">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -167,9 +167,8 @@
               <div class="app-search__meta">
                 <div class="app-examples" data-examples>
                   <span class="app-examples__label">Try:</span>
-                  <button type="button" class="chip" data-example="733739038906">Omega-3</button>
-                  <button type="button" class="chip" data-example="300054451712">Vitamin D</button>
-                  <button type="button" class="chip" data-example="301875476016">Magnesium</button>
+                  <button type="button" class="chip" data-example="733739038906">NOW Sports Multi</button>
+                  <button type="button" class="chip" data-example="300054451712">Centrum Adults</button>
                 </div>
                 <p class="app-lookups" data-lookups hidden></p>
               </div>
@@ -217,27 +216,13 @@
       </div>
     </div>
 
-    <!-- Sign-in sheet (Phase b — handlers stubbed) -->
+    <!-- Sign-in sheet — provider OAuth is Phase (b); until then, contact us. -->
     <div class="app-sheet" data-signin hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="signin-title">
       <div class="app-sheet__panel">
         <button type="button" class="app-sheet__close" data-signin-close aria-label="Close">&times;</button>
-        <h2 id="signin-title" class="display-italic text-2xl text-yora-heading">You've used your free lookups</h2>
-        <p class="mt-2 text-yora-muted">Sign in to keep scoring supplements. It's free.</p>
-        <div class="app-sheet__providers">
-          <button type="button" class="app-provider" data-provider="google">
-            <span class="app-provider__icon" aria-hidden="true">G</span> Continue with Google
-          </button>
-          <button type="button" class="app-provider" data-provider="apple">
-            <span class="app-provider__icon" aria-hidden="true"></span> Continue with Apple
-          </button>
-          <button type="button" class="app-provider" data-provider="email">
-            <span class="app-provider__icon" aria-hidden="true">@</span> Continue with email
-          </button>
-        </div>
-        <p class="mt-4 text-xs text-yora-muted">
-          By continuing you agree to our <a href="terms.html" class="underline text-yora-grass">Terms</a>
-          and <a href="privacy.html" class="underline text-yora-grass">Privacy Notice</a>.
-        </p>
+        <h2 id="signin-title" class="display-italic text-2xl text-yora-heading">You've used the 10 free lookups</h2>
+        <p class="mt-2 text-yora-muted">Sign-in is coming soon. Until then, contact us and we'll help you keep going.</p>
+        <a class="btn-primary app-sheet__cta" href="mailto:hello@yora.health">Contact us — hello@yora.health</a>
       </div>
     </div>
 
@@ -283,6 +268,6 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/app.js?v=2"></script>
+    <script src="js/app.js?v=3"></script>
   </body>
 </html>

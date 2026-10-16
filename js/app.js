@@ -7,7 +7,7 @@
  * enforces all limits server-side.
  *
  * Phase (b) — TODO: real sign-in (Google / Apple / email) exchanged for an authed
- * session token. The sheet UI is wired; provider handlers are stubbed below.
+ * session token. Until then the 429 sheet points people to hello@yora.health.
  */
 (function () {
   "use strict";
@@ -160,11 +160,13 @@
     if (res.status === 429) {
       let body = {};
       try { body = await res.clone().json(); } catch (_) { /* ignore */ }
-      if (body.reason === "login_required") {
+      // FastAPI wraps custom payloads in `detail`: { detail: { reason, limit, message } }.
+      const reason = (body.detail && body.detail.reason) || body.reason;
+      if (reason === "login_required") {
         openSignIn();
         throw new ApiError(429, "login_required");
       }
-      throw new ApiError(429, body.reason || "rate_limited");
+      throw new ApiError(429, reason || "rate_limited");
     }
     return res;
   }
@@ -202,7 +204,7 @@
     resultEl.innerHTML = "";
     showStages(true);
     setStage(0);
-    setStatus("Looking up " + esc(barcode) + " …", "busy");
+    setStatus("Looking up " + barcode + " …", "busy");
 
     try {
       // 1 — identity / composition
@@ -269,15 +271,20 @@
   function bandClass(label) {
     const l = String(label || "").toLowerCase();
     if (l === "excellent" || l === "good") return "var(--yora-grass)";
-    if (l === "fair" || l === "moderate") return "#b7791f";
+    if (l === "fair" || l === "moderate") return "var(--yora-fair)";
     if (l === "unrated") return "var(--yora-muted)";
-    return "#c45c5c";
+    return "var(--yora-poor)";
   }
 
+  function isPlaceholderTitle(t) {
+    // Backend sometimes returns a placeholder like "<NOT FOUND>" for unresolved identity.
+    return !t || /not\s*found/i.test(t) || /^<.*>$/.test(String(t).trim());
+  }
   function productName(p) {
     if (!p) return "";
     const prod = p.product || {};
-    return prod.title || prod.name || p.title || p.name || "";
+    const t = prod.title || prod.name || p.title || p.name || "";
+    return isPlaceholderTitle(t) ? "" : t;
   }
   function productMeta(p) {
     if (!p) return "";
@@ -297,7 +304,7 @@
     _scoreData = score && score.scores ? score.scores : null;
     if (_scoreData && !_scoreData[_region]) _region = Object.keys(_scoreData)[0] || "CA";
 
-    const name = productName(product) || "Product " + esc(barcode);
+    const name = productName(product) || ("Product " + barcode);
     const meta = productMeta(product);
 
     const regionToggle = _scoreData
@@ -365,6 +372,11 @@
       ? `<div class="app-note">${d.caps_applied.map((c) => esc(c.reason)).join(" · ")}</div>`
       : "";
 
+    const explText = (d.plain_explanation && d.plain_explanation.summary) || d.explanation || "";
+    const explanation = explText
+      ? `<p class="app-explain">${esc(explText)}</p>`
+      : "";
+
     const drivers = (d.top_drivers && d.top_drivers.length)
       ? `<div class="app-block"><p class="app-block__h">Why this score</p>${d.top_drivers.map((x) => {
           const cls = x.impact == null ? "cap" : (x.impact < 0 ? "neg" : "pos");
@@ -379,7 +391,7 @@
         ).join("")}</div>`
       : "";
 
-    return scores + provisional + caps + drivers + levers;
+    return scores + provisional + caps + explanation + drivers + levers;
   }
 
   function renderProductExtras(p) {
@@ -492,7 +504,7 @@
       });
       if (!res.ok) throw new ApiError(res.status, "resolve");
       const data = await res.json();
-      const barcode = data.barcode || (data.product && data.product.barcode);
+      const barcode = effectiveBarcode(data);
       if (!barcode) {
         setStatus("Couldn't read a barcode from that photo. Try again or type it in.", "error");
         showStages(false);
@@ -506,28 +518,43 @@
     }
   }
 
+  // /v1/resolve returns barcode as { effective, scanned, from_image }, not a string.
+  function effectiveBarcode(data) {
+    if (!data) return "";
+    const b = data.barcode;
+    if (typeof b === "string" && b) return b;
+    if (b && typeof b === "object") return b.effective || b.scanned || "";
+    const pb = data.product && data.product.barcode;
+    if (typeof pb === "string") return pb;
+    if (pb && typeof pb === "object") return pb.effective || "";
+    return "";
+  }
+
+  // FileReader → data: URL (allowed by prod CSP img-src). blob: URLs are not.
   function fileToBase64(file) {
     return new Promise((resolve, reject) => {
-      const MAX = 1600;
-      const img = new Image();
-      img.onload = () => {
-        const scale = Math.min(1, MAX / Math.max(img.width, img.height));
-        if (scale === 1) {
-          const fr = new FileReader();
-          fr.onload = () => resolve(String(fr.result).split(",", 2)[1]);
-          fr.onerror = reject;
-          fr.readAsDataURL(file);
-        } else {
+      const fr = new FileReader();
+      fr.onerror = reject;
+      fr.onload = () => {
+        const dataUrl = String(fr.result);
+        const img = new Image();
+        img.onload = () => {
+          const MAX = 1600;
+          const scale = Math.min(1, MAX / Math.max(img.width, img.height));
+          if (scale === 1) {
+            resolve(dataUrl.split(",", 2)[1]);
+            return;
+          }
           const cv = document.createElement("canvas");
           cv.width = Math.round(img.width * scale);
           cv.height = Math.round(img.height * scale);
           cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
           resolve(cv.toDataURL("image/jpeg", 0.92).split(",", 2)[1]);
-        }
-        URL.revokeObjectURL(img.src);
+        };
+        img.onerror = reject;
+        img.src = dataUrl;
       };
-      img.onerror = reject;
-      img.src = URL.createObjectURL(file);
+      fr.readAsDataURL(file);
     });
   }
 
@@ -545,13 +572,6 @@
     signin.setAttribute("aria-hidden", "true");
   }
 
-  // TODO (Phase b): run the provider SDK, then POST /v1/session/exchange
-  // { provider, id_token } → swap _session.token for the authed token.
-  function startSignIn(provider) {
-    setStatus(`Sign-in with ${provider} is coming soon.`, null);
-    closeSignIn();
-  }
-
   /* ============================ Wiring ============================ */
   form?.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -567,9 +587,6 @@
   photoInput?.addEventListener("change", (e) => handlePhoto(e.target.files && e.target.files[0]));
 
   $("[data-signin-close]")?.addEventListener("click", closeSignIn);
-  document.querySelectorAll("[data-provider]").forEach((b) => {
-    b.addEventListener("click", () => startSignIn(b.getAttribute("data-provider")));
-  });
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") { closeScanner(); closeSignIn(); }

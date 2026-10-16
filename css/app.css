@@ -163,7 +163,7 @@
 }
 
 .app-status.is-error {
-  color: #c45c5c;
+  color: var(--yora-poor);
 }
 
 .app-status.is-busy::before {
@@ -394,11 +394,18 @@
 }
 
 .app-driver__impact--neg {
-  color: #c45c5c;
+  color: var(--yora-poor);
 }
 
 .app-driver__impact--cap {
-  color: #b7791f;
+  color: var(--yora-fair);
+}
+
+.app-explain {
+  margin-top: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--yora-heading);
 }
 
 .app-note {
@@ -429,7 +436,7 @@
 
 .app-tag--warn {
   background: #fdf0e3;
-  color: #b7791f;
+  color: var(--yora-fair);
 }
 
 .app-list {
@@ -466,7 +473,7 @@
 }
 
 .app-list__dot--warn {
-  background: #b7791f;
+  background: var(--yora-fair);
 }
 
 .app-list__meta {
@@ -486,13 +493,13 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
   background: #fdf0e3;
-  color: #b7791f;
+  color: var(--yora-fair);
   vertical-align: 1px;
 }
 
 .app-sev--contraindication {
   background: #fde8e8;
-  color: #c45c5c;
+  color: var(--yora-poor);
 }
 
 .app-empty {
@@ -578,41 +585,7 @@
 }
 
 /* ---------- Sign-in sheet ---------- */
-.app-sheet__providers {
+.app-sheet__cta {
+  display: inline-flex;
   margin-top: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.app-provider {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  width: 100%;
-  padding: 0.85rem 1rem;
-  border: 1px solid var(--yora-border);
-  border-radius: 0.85rem;
-  background: var(--yora-white);
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: var(--yora-ink);
-  cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
-}
-
-.app-provider:hover {
-  border-color: var(--yora-sage);
-  background: var(--yora-cream);
-}
-
-.app-provider__icon {
-  display: inline-grid;
-  place-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-  background: var(--yora-surface);
-  font-weight: 700;
-  font-size: 0.8125rem;
 }
