@@ -401,6 +401,25 @@
   color: var(--yora-fair);
 }
 
+/* Breakdown rows (How the score adds up) */
+.app-sum__total {
+  font-weight: 700;
+  border-top: 2px solid var(--yora-border);
+  border-bottom: none;
+}
+
+.app-sum__total .app-driver__impact {
+  min-width: 3.5rem;
+  color: var(--yora-heading);
+}
+
+.app-sum__meta {
+  font-style: normal;
+  font-size: 0.8125rem;
+  color: var(--yora-muted);
+  margin-left: 0.25rem;
+}
+
 .app-explain {
   margin-top: 1.25rem;
   font-size: 1rem;
