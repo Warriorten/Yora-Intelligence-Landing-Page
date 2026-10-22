@@ -377,8 +377,39 @@
       ? `<p class="app-explain">${esc(explText)}</p>`
       : "";
 
-    const drivers = (d.top_drivers && d.top_drivers.length)
-      ? `<div class="app-block"><p class="app-block__h">Why this score</p>${d.top_drivers.map((x) => {
+    // How the number adds up (API `score_breakdown`, 1.42.3): one deduction per weighted pillar,
+    // the score before limits, the limit that bit (if any) and the final — integers that sum.
+    const bd = d.score_breakdown || null;
+    const sumRow = (impact, text, cls, strong) =>
+      `<div class="app-driver${strong ? " app-sum__total" : ""}"><span class="app-driver__impact app-driver__impact--${cls}">${esc(impact)}</span><span>${text}</span></div>`;
+    let breakdown = "";
+    if (bd && bd.product && Array.isArray(bd.product.lines)) {
+      const pr = bd.product;
+      const lines = pr.lines.map((l) =>
+        sumRow(l.deduction ? "−" + l.deduction : "0", `${esc(l.name)} <em class="app-sum__meta">${esc(l.score)}/100 · weight ${Math.round((l.weight || 0) * 100)}%</em>`, l.deduction ? "neg" : "pos"));
+      let limit = "";
+      if (pr.limit) {
+        const why = (pr.limit.reasons || []).map(esc).join(" ");
+        limit = sumRow("−" + pr.limit.deduction, `Limit: cannot score above ${esc(pr.limit.cap)}. <em class="app-sum__meta">${why}</em>`, "cap");
+      }
+      breakdown += `<div class="app-block"><p class="app-block__h">How the Product Score adds up</p>
+        ${sumRow("100", "Starting point", "pos")}${lines.join("")}
+        ${pr.limit ? sumRow("= " + pr.before_limits, "Formulation score before limits", "pos", true) : ""}${limit}
+        ${sumRow("= " + pr.final, "Product Score", "pos", true)}</div>`;
+      if (bd.verification && Array.isArray(bd.verification.lines)) {
+        const v = bd.verification;
+        breakdown += `<div class="app-block"><p class="app-block__h">How the Verification Score adds up</p>
+          ${v.lines.map((l) => sumRow("+" + l.points, `${esc(l.name)} <em class="app-sum__meta">${esc(l.score)}/100 · weight ${Math.round((l.weight || 0) * 100)}%</em>`, "pos")).join("")}
+          ${sumRow("= " + v.final, "Verification Score", "pos", true)}</div>`;
+      }
+    }
+
+    // The ranked reasons. With the breakdown shown, a cap is already explained there, so its
+    // row is left out here (its text quotes the additive's rating, e.g. "(-2)", which reads as a
+    // deduction and does not add up with the rest).
+    const driverRows = (d.top_drivers || []).filter((x) => !(bd && x.kind === "cap"));
+    const drivers = driverRows.length
+      ? `<div class="app-block"><p class="app-block__h">${bd ? "Main factors" : "Why this score"}</p>${driverRows.map((x) => {
           const cls = x.impact == null ? "cap" : (x.impact < 0 ? "neg" : "pos");
           const txt = x.impact == null ? "CAP" : (x.impact > 0 ? "+" + x.impact : String(x.impact));
           return `<div class="app-driver"><span class="app-driver__impact app-driver__impact--${cls}">${esc(txt)}</span><span>${esc(x.text)}</span></div>`;
@@ -391,7 +422,7 @@
         ).join("")}</div>`
       : "";
 
-    return scores + provisional + caps + explanation + drivers + levers;
+    return scores + provisional + (bd ? "" : caps) + explanation + breakdown + drivers + levers;
   }
 
   function renderProductExtras(p) {
