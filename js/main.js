@@ -203,6 +203,29 @@
     });
   });
 
+  /* ---------- Diagnostic CTA (prefills the demo form) ---------- */
+  const engagement = document.querySelector("[data-engagement]");
+  const subjectInput = document.querySelector("[data-form-subject]");
+  const messageInput = document.querySelector("#explore");
+  const DIAGNOSTIC_NOTE =
+    "I'd like to discuss a Product Intelligence Diagnostic across a representative sample of our catalogue.";
+
+  function setEngagement(value) {
+    if (engagement) engagement.value = value;
+    if (subjectInput) {
+      subjectInput.value =
+        value === "diagnostic" ? "Yora diagnostic enquiry" : "Yora demo request";
+    }
+    if (value === "diagnostic" && messageInput && !messageInput.value.trim()) {
+      messageInput.value = DIAGNOSTIC_NOTE;
+    }
+  }
+
+  document.querySelectorAll("[data-diagnostic-cta]").forEach((btn) => {
+    btn.addEventListener("click", () => setEngagement("diagnostic"));
+  });
+  engagement?.addEventListener("change", () => setEngagement(engagement.value));
+
   /* ---------- Footer year ---------- */
   document.querySelectorAll("[data-year]").forEach((el) => {
     el.textContent = String(new Date().getFullYear());

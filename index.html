@@ -117,7 +117,7 @@
                 "name": "What is the difference between Product Score and Verification Score?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Product Score reflects formulation quality. Verification Score reflects supporting evidence. They are independent proprietary analytical outputs so certifications alone are never mistaken for superior formulation. They are not Health Canada ratings, approvals or certifications."
+                  "text": "Product Score reflects formulation quality. Verification Score reflects supporting evidence. They are independent proprietary analytical outputs — so a strong formulation can still have a lower Verification Score when supporting records are unconfirmed. Missing evidence is distinguished from negative findings. They are not Health Canada ratings, approvals or certifications."
                 }
               },
               {
@@ -256,14 +256,15 @@
               <h1 class="display-italic text-4xl sm:text-5xl lg:text-[3.5rem] text-yora-heading leading-[1.1]">
                 Intelligence behind better supplement decisions.
               </h1>
-              <p class="mt-5 text-lg text-yora-muted leading-relaxed max-w-md">
-                Yora helps healthcare, practitioner and supplement platforms resolve products, normalize ingredients,
-                assess formulation quality and verification evidence, and explain the results clearly.
+              <p class="mt-5 text-lg text-yora-muted leading-relaxed max-w-xl">
+                Yora Intelligence transforms fragmented supplement data into structured, explainable product intelligence,
+                helping healthcare, practitioner and commerce platforms evaluate products, compare formulations and
+                deliver more informed recommendations.
               </p>
               <div class="mt-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
                 <a href="#demo" class="btn-primary w-full sm:w-auto">Request a Demo</a>
                 <a href="app.html" class="btn-secondary w-full sm:w-auto">Try it live</a>
-                <a href="#intelligence" class="btn-ghost w-full sm:w-auto justify-center">See how it works</a>
+                <a href="#how" class="btn-ghost w-full sm:w-auto justify-center">See how it works</a>
               </div>
               <dl class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-4 max-w-lg">
                 <div class="border-b border-yora-border pb-3 sm:border-0 sm:pb-0">
@@ -296,7 +297,7 @@
       </section>
 
       <!-- How it works — Resolve → Normalize → Assess → Explain -->
-      <section class="py-20 md:py-28 band-cream" aria-labelledby="how-heading">
+      <section id="how" class="py-20 md:py-28 band-cream" aria-labelledby="how-heading">
         <div class="mx-auto max-w-content px-5 sm:px-8">
           <div class="max-w-xl">
             <p class="eyebrow mb-3">How it works</p>
@@ -400,53 +401,51 @@
         </div>
       </section>
 
-      <!-- Intelligence -->
+      <!-- Intelligence — sample enterprise output -->
       <section id="intelligence" class="py-20 md:py-28 band-cream">
         <div class="mx-auto max-w-content px-5 sm:px-8">
           <div class="max-w-2xl reveal">
             <p class="eyebrow mb-3">Yora Intelligence</p>
             <h2 class="display-italic text-3xl sm:text-4xl text-yora-heading leading-tight">
-              From product inputs to explained outputs.
+              What an enterprise customer receives.
             </h2>
             <p class="mt-4 text-yora-muted leading-relaxed">
-              Resolve products, normalize formulation details, assess two independent scores, and explain the factors behind each result.
+              A structured, explainable product record — identity, normalized formulation, two independent scores,
+              confidence and sources — ready for APIs and existing workflows.
             </p>
           </div>
 
-          <ol class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            <li class="reveal">
-              <p class="step-num">01</p>
-              <h3 class="mt-3 font-semibold text-yora-heading">Resolve</h3>
-              <p class="mt-2 text-sm text-yora-muted leading-relaxed">Labels, barcodes, manufacturer data and product identification.</p>
-            </li>
-            <li class="reveal reveal-delay-1">
-              <p class="step-num">02</p>
-              <h3 class="mt-3 font-semibold text-yora-heading">Normalize</h3>
-              <p class="mt-2 text-sm text-yora-muted leading-relaxed">Ingredient names, forms, quantities and formulation information.</p>
-            </li>
-            <li class="reveal reveal-delay-2">
-              <p class="step-num">03</p>
-              <h3 class="mt-3 font-semibold text-yora-heading">Assess</h3>
-              <p class="mt-2 text-sm text-yora-muted leading-relaxed">Product Score for formulation. Verification Score for supporting evidence.</p>
-            </li>
-            <li class="reveal reveal-delay-3">
-              <p class="step-num">04</p>
-              <h3 class="mt-3 font-semibold text-yora-heading">Explain</h3>
-              <p class="mt-2 text-sm text-yora-muted leading-relaxed">Confidence, contributing factors, sources and structured API outputs.</p>
-            </li>
-          </ol>
-
-          <div class="mt-16 grid gap-6 lg:grid-cols-5 reveal">
-            <div class="lg:col-span-3 card overflow-hidden bg-yora-white">
+          <div class="mt-14 grid gap-6 lg:grid-cols-5 reveal">
+            <article class="lg:col-span-3 card overflow-hidden bg-yora-white output-sample">
               <div class="relative h-44">
                 <img class="media-thumb" src="assets/images/product-capsules.jpg" alt="Supplement capsules" width="1000" height="400" loading="lazy" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div class="absolute bottom-0 p-5 text-white">
-                  <p class="text-xs uppercase tracking-wider text-white/70">Illustrative analysis</p>
+                  <p class="text-xs uppercase tracking-wider text-white/70">Illustrative sample output</p>
                   <h3 class="font-display text-xl mt-1">Omega-3 Ultra Complex</h3>
                 </div>
               </div>
-              <div class="p-6">
+              <div class="p-6 sm:p-7">
+                <dl class="output-meta">
+                  <div>
+                    <dt>Matched identity</dt>
+                    <dd>Omega-3 Ultra Complex · Brand example</dd>
+                  </div>
+                  <div>
+                    <dt>Barcode</dt>
+                    <dd>000000123456 <span class="output-meta__hint">(illustrative)</span></dd>
+                  </div>
+                </dl>
+
+                <h4 class="output-sample__h">Normalized formulation</h4>
+                <ul class="formula-list">
+                  <li><span>Fish oil</span><span>triglyceride · 1,000 mg</span></li>
+                  <li><span>EPA</span><span>400 mg</span></li>
+                  <li><span>DHA</span><span>300 mg</span></li>
+                  <li><span>Vitamin E</span><span>mixed tocopherols · 10 IU</span></li>
+                </ul>
+
+                <h4 class="output-sample__h">Scores</h4>
                 <div class="score-pill-grid">
                   <div class="score-pill score-pill--product">
                     <p class="score-pill__label">Product Score</p>
@@ -457,14 +456,29 @@
                     <p class="score-pill__value">71</p>
                   </div>
                 </div>
-                <p class="mt-4 text-xs text-yora-muted">Product Score — formulation quality · Verification Score — supporting evidence</p>
-                <ul class="mt-6 space-y-2 text-sm text-yora-muted">
-                  <li>✓ Forms and dosages mapped to normalized records</li>
-                  <li>✓ Formulation completeness vs category benchmarks</li>
-                  <li>– Some evidence unavailable (not a verification failure)</li>
-                </ul>
+
+                <dl class="output-meta mt-5">
+                  <div>
+                    <dt>Data confidence</dt>
+                    <dd>Moderate — some supporting records unconfirmed</dd>
+                  </div>
+                  <div>
+                    <dt>Sources</dt>
+                    <dd>NIH DSLD · Health Canada NHP monograph <span class="output-meta__hint">(illustrative)</span></dd>
+                  </div>
+                </dl>
+
+                <h4 class="output-sample__h">Why the scores differ</h4>
+                <p class="output-sample__explain">
+                  This formulation receives a strong Product Score based on the assessed ingredients and dosages.
+                  Its Verification Score is lower because certain supporting records have not yet been confirmed.
+                  Missing evidence is distinguished from negative findings.
+                </p>
+                <p class="mt-3 text-xs text-yora-muted">
+                  Illustrative wording — not a validated assessment of a specific commercial product.
+                </p>
               </div>
-            </div>
+            </article>
 
             <div class="lg:col-span-2 space-y-4">
               <div class="card bg-yora-white p-5 border-l-4 border-l-yora-yellow">
@@ -478,6 +492,7 @@
                 <p class="font-semibold text-yora-heading">Evidence unavailable ≠ failed</p>
                 <p class="mt-2 text-sm text-yora-muted leading-relaxed">
                   Missing evidence is a limitation — never communicated as a failed verification.
+                  That distinction is one of Yora’s strongest differentiators.
                 </p>
               </div>
               <div class="media-frame h-28">
@@ -588,6 +603,20 @@
               <p class="mt-1 text-sm text-yora-muted">Making contributing factors understandable to users.</p>
             </li>
           </ul>
+
+          <div class="mt-8 card bg-yora-white p-6 border-l-4 border-l-yora-sage reveal">
+            <p class="font-semibold text-yora-heading">Performance evidence on request</p>
+            <p class="mt-2 text-sm text-yora-muted leading-relaxed">
+              Performance evidence and methodology can be reviewed during a technical discussion.
+              We do not publish unverified percentages; results are shared once the denominator, test set and
+              methodology are established.
+            </p>
+          </div>
+
+          <div class="mt-8 flex flex-col sm:flex-row flex-wrap gap-3 reveal">
+            <a href="#demo" class="btn-primary">Request a Demo</a>
+            <a href="#demo-form" class="btn-secondary" data-diagnostic-cta>Discuss a Diagnostic</a>
+          </div>
         </div>
       </section>
 
@@ -737,8 +766,9 @@
               <summary>What is the difference between Product Score and Verification Score?</summary>
               <p>
                 Product Score reflects formulation quality. Verification Score reflects supporting evidence. They are
-                independent proprietary analytical outputs — so certifications alone are never mistaken for superior
-                formulation. They are not Health Canada ratings, approvals or certifications.
+                independent proprietary analytical outputs — so a strong formulation can still have a lower Verification
+                Score when supporting records are unconfirmed. Missing evidence is distinguished from negative findings.
+                They are not Health Canada ratings, approvals or certifications.
               </p>
             </details>
             <details class="faq-item">
@@ -781,6 +811,16 @@
                 See how Yora Intelligence could enhance product intelligence, improve workflows and unlock new capabilities —
                 as decision-support intelligence, not a replacement for professional judgement.
               </p>
+
+              <div class="diagnostic-card">
+                <p class="eyebrow text-yora-sage mb-2">Start smaller</p>
+                <h3>Explore a Product Intelligence Diagnostic</h3>
+                <p>
+                  Evaluate how Yora can identify products, normalize formulation data and generate explainable scores
+                  across a representative sample of your catalogue.
+                </p>
+                <a href="#demo-form" class="btn-primary mt-5" data-diagnostic-cta>Discuss a Diagnostic</a>
+              </div>
             </div>
 
             <div class="reveal reveal-delay-1">
@@ -791,12 +831,13 @@
                 <p class="form-error mb-4 text-sm text-red-600 hidden" data-form-error role="alert"></p>
 
                 <form
+                  id="demo-form"
                   data-demo-form
                   action="https://formspree.io/f/mzezyrll"
                   method="POST"
                   novalidate
                 >
-                  <input type="hidden" name="_subject" value="Yora demo request" />
+                  <input type="hidden" name="_subject" value="Yora demo request" data-form-subject />
                   <div class="honeypot" aria-hidden="true">
                     <label for="company_url">Company website</label>
                     <input type="text" id="company_url" name="_gotcha" tabindex="-1" autocomplete="off" />
@@ -832,6 +873,13 @@
                         <option>Retail / Marketplace</option>
                         <option>Data / AI Platform</option>
                         <option>Other</option>
+                      </select>
+                    </div>
+                    <div class="form-field">
+                      <label for="engagement">How should we start?</label>
+                      <select id="engagement" name="engagement" data-engagement>
+                        <option value="demo">Request a demo</option>
+                        <option value="diagnostic">Discuss a Product Intelligence Diagnostic</option>
                       </select>
                     </div>
                     <div class="form-field">
