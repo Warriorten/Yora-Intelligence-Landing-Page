@@ -598,4 +598,7 @@
   // Warm up the anonymous session on load so the first lookup is instant and the
   // free-lookup counter shows immediately. Failure here is non-fatal.
   getSession().catch(() => { /* shown on first lookup attempt */ });
+
+  const startBarcode = qs.get("barcode");
+  if (startBarcode) runLookup(startBarcode);
 })();
