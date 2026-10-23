@@ -385,8 +385,14 @@
     let breakdown = "";
     if (bd && bd.product && Array.isArray(bd.product.lines)) {
       const pr = bd.product;
-      const lines = pr.lines.map((l) =>
-        sumRow(l.deduction ? "−" + l.deduction : "0", `${esc(l.name)} <em class="app-sum__meta">${esc(l.score)}/100 · weight ${Math.round((l.weight || 0) * 100)}%</em>`, l.deduction ? "neg" : "pos"));
+      // The technical breakdown in plain words (Andy): each pillar's one-line text from
+      // `plain_explanation.pillars` sits under its deduction row.
+      const plainByKey = {};
+      ((d.plain_explanation && d.plain_explanation.pillars) || []).forEach((p) => { if (p && p.key) plainByKey[p.key] = p.text || ""; });
+      const lines = pr.lines.map((l) => {
+        const note = plainByKey[l.key] ? `<span class="app-sum__note">${esc(plainByKey[l.key])}</span>` : "";
+        return sumRow(l.deduction ? "−" + l.deduction : "0", `${esc(l.name)} <em class="app-sum__meta">${esc(l.score)}/100 · weight ${Math.round((l.weight || 0) * 100)}%</em>${note}`, l.deduction ? "neg" : "pos");
+      });
       let limit = "";
       if (pr.limit) {
         const why = (pr.limit.reasons || []).map(esc).join(" ");
