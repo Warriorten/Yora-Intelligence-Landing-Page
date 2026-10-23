@@ -420,6 +420,14 @@
   margin-left: 0.25rem;
 }
 
+.app-sum__note {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--yora-muted);
+}
+
 .app-explain {
   margin-top: 1.25rem;
   font-size: 1rem;
