@@ -14,6 +14,7 @@ two-score result, built against `api-dev`. Sign-in is **Phase (b)** (stubbed UI)
 | `app.html` | The page (shared header/footer, Tailwind config, search + result shell) |
 | `css/app.css` | App-only components (search, stage progress, score hero, sign-in sheet) |
 | `js/app.js` | Session bootstrap, lookups, rendering, scan/upload, sign-in stubs |
+| `js/vendor/zxing-0.21.3.min.js` | Pinned, same-origin ZXing browser decoder for live scanning |
 
 Shared edits: `index.html` + `api.html` nav/footer gain a **Try it** link; hero
 and the `#app` section get a "Try the live demo" CTA. `sitemap.xml` + `llms.txt`
@@ -83,7 +84,8 @@ Published spec documents `ApiKeyAuth` (`X-API-Key`) and open response bodies
 ## 4. UX / simplified flow
 
 1. **Search** — one field ("Scan or enter a barcode"), camera **Scan**
-   (`BarcodeDetector` + fallback), **photo** upload (→ `/v1/resolve`), example chips.
+   (ZXing with UPC/EAN/Code 128 hints, `TRY_HARDER`, and the iOS track-reset
+   workaround), **photo** upload (→ `/v1/resolve`), example chips.
 2. **Staged progress** — Resolve · Normalize · Assess · Explain.
 3. **Result** — product identity + the two score pills, **CA/US toggle**, "why this
    score" (`top_drivers`), "what would raise it" (`improvement_levers`), provisional/

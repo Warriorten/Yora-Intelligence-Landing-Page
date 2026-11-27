@@ -596,12 +596,29 @@
   right: 1rem;
 }
 
-.app-scanner__video {
-  width: 100%;
+.app-scanner__viewport {
+  position: relative;
+  overflow: hidden;
   border-radius: 0.85rem;
   background: #000;
   aspect-ratio: 4 / 3;
+}
+
+.app-scanner__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+.app-scanner__guide {
+  position: absolute;
+  inset: 20% 8%;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  border-radius: 0.65rem;
+  box-shadow: 0 0 0 999px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
 }
 
 .app-scanner__hint {
