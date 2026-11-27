@@ -93,6 +93,24 @@
   transition: border-color 0.2s, background 0.2s;
 }
 
+/* Cover the Photo control instead of display:none. iOS ignores a programmatic
+   click on a hidden file input, so the Scan fallback never opened the camera. */
+.app-search__photo {
+  position: relative;
+  overflow: hidden;
+}
+
+.app-search__file {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
 .app-search__scan:hover,
 .app-search__photo:hover {
   border-color: var(--yora-sage);
