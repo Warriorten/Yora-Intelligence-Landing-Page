@@ -162,7 +162,7 @@
                     <circle cx="12" cy="13" r="3.5" />
                   </svg>
                   <span class="hidden sm:inline">Photo</span>
-                  <input type="file" accept="image/*" capture="environment" data-photo-input class="app-search__file" />
+                  <input type="file" accept="image/*" capture="environment" data-photo-input hidden />
                 </label>
                 <button type="submit" class="btn-primary app-search__go" data-go>Score it</button>
               </div>
@@ -214,7 +214,7 @@
           <p class="font-semibold">Scan a barcode</p>
           <button type="button" class="app-scanner__close" data-scanner-close aria-label="Close scanner">&times;</button>
         </div>
-        <video class="app-scanner__video" data-scanner-video autoplay muted playsinline webkit-playsinline></video>
+        <video class="app-scanner__video" data-scanner-video playsinline muted></video>
         <p class="app-scanner__hint" data-scanner-hint>Point the camera at the product barcode.</p>
       </div>
     </div>

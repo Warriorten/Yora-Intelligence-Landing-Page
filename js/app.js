@@ -469,166 +469,58 @@
   }
 
   /* ============================ Camera scan ============================ */
-  // iOS Safari breaks the obvious implementation in three places:
-  // 1. BarcodeDetector throws if the format list includes "upc_a" (unsupported).
-  //    That happened before getUserMedia, so the camera never opened.
-  // 2. play() while an ancestor is display:none (the [hidden] overlay) does not
-  //    produce frames — the preview stays black.
-  // 3. detect(video) always returns [] on WebKit. A canvas snapshot is readable.
-  // getUserMedia must be called in the same turn as the tap. No await before it.
   const scanner = $("[data-scanner]");
   const scannerVideo = $("[data-scanner-video]");
   const scannerHint = $("[data-scanner-hint]");
-  const scanCanvas = document.createElement("canvas");
-  const scanCtx = scanCanvas.getContext("2d", { willReadFrequently: true });
   let _stream = null;
-  let _scanTimer = null;
-  let _scanGen = 0;
-
-  const SCAN_FORMATS = ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39"];
-
-  function createDetector() {
-    const attempts = [
-      SCAN_FORMATS,
-      SCAN_FORMATS.filter((f) => f !== "upc_a"),
-      null,
-    ];
-    let lastErr;
-    for (let i = 0; i < attempts.length; i++) {
-      try {
-        return attempts[i]
-          ? new window.BarcodeDetector({ formats: attempts[i] })
-          : new window.BarcodeDetector();
-      } catch (err) {
-        lastErr = err;
-      }
-    }
-    throw lastErr;
-  }
-
-  function primeVideo(video) {
-    video.muted = true;
-    video.defaultMuted = true;
-    video.playsInline = true;
-    video.setAttribute("muted", "");
-    video.setAttribute("autoplay", "");
-    video.setAttribute("playsinline", "");
-    video.setAttribute("webkit-playsinline", "");
-  }
-
-  function revealScanner(hint) {
-    if (!scanner) return;
-    scanner.hidden = false;
-    scanner.setAttribute("aria-hidden", "false");
-    if (scannerHint && hint) scannerHint.textContent = hint;
-    // Layout now, so iOS allocates a real video frame once the stream attaches.
-    void scanner.offsetHeight;
-  }
-
-  function stopStream() {
-    if (!_stream) return;
-    _stream.getTracks().forEach((t) => t.stop());
-    _stream = null;
-  }
-
-  function openPhotoPicker() {
-    if (photoInput) photoInput.click();
-  }
-
-  // Vision reports a UPC-A as EAN-13 with a leading 0. The demo looks up 12 digits.
-  function normalizeScannedCode(raw) {
-    const v = String(raw || "").replace(/\s+/g, "");
-    if (/^0\d{12}$/.test(v)) return v.slice(1);
-    return v;
-  }
-
-  async function readBarcode(detector) {
-    const video = scannerVideo;
-    const vw = video.videoWidth;
-    const vh = video.videoHeight;
-    if (!scanCtx || !vw || !vh || video.readyState < 2) return "";
-    const maxW = 960;
-    const w = Math.min(vw, maxW);
-    const h = Math.max(1, Math.round(vh * (w / vw)));
-    if (scanCanvas.width !== w || scanCanvas.height !== h) {
-      scanCanvas.width = w;
-      scanCanvas.height = h;
-    }
-    scanCtx.drawImage(video, 0, 0, w, h);
-    const codes = await detector.detect(scanCanvas);
-    if (!codes || !codes.length) return "";
-    return normalizeScannedCode(codes[0].rawValue);
-  }
-
-  function scheduleScan(detector, gen) {
-    const tick = async () => {
-      if (gen !== _scanGen || !scanner || scanner.hidden) return;
-      try {
-        const value = await readBarcode(detector);
-        if (value && gen === _scanGen) {
-          closeScanner();
-          runLookup(value);
-          return;
-        }
-      } catch (_) { /* transient decode error — keep scanning */ }
-      if (gen === _scanGen && scanner && !scanner.hidden) {
-        _scanTimer = setTimeout(tick, 200);
-      }
-    };
-    _scanTimer = setTimeout(tick, 200);
-  }
+  let _scanRAF = null;
 
   async function openScanner() {
-    if (!scanner || !scannerVideo) return;
     if (!("BarcodeDetector" in window)) {
-      setStatus("Live scanning isn't supported on this browser — use Photo instead.", null);
-      openPhotoPicker();
+      // No native detector — fall back to the photo path.
+      setStatus("Live scanning isn't supported here — use Photo instead.", null);
+      if (photoInput) photoInput.click();
       return;
     }
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       setStatus("Camera unavailable. Try the Photo option.", "error");
       return;
     }
-
-    let detector;
     try {
-      detector = createDetector();
-    } catch (_) {
-      setStatus("Live scanning isn't supported on this browser — use Photo instead.", null);
-      openPhotoPicker();
-      return;
-    }
-
-    const gen = ++_scanGen;
-    revealScanner("Allow camera access, then point it at the barcode.");
-    primeVideo(scannerVideo);
-
-    try {
-      _stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: { ideal: "environment" } },
+      const detector = new window.BarcodeDetector({
+        formats: ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39"],
       });
-      if (gen !== _scanGen) { stopStream(); return; }
+      _stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
       scannerVideo.srcObject = _stream;
       await scannerVideo.play();
-      if (gen !== _scanGen) { stopStream(); return; }
+      scanner.hidden = false;
+      scanner.setAttribute("aria-hidden", "false");
       if (scannerHint) scannerHint.textContent = "Point the camera at the product barcode.";
-      scheduleScan(detector, gen);
-    } catch (_) {
-      if (gen !== _scanGen) return;
+
+      const tick = async () => {
+        if (scanner.hidden) return;
+        try {
+          const codes = await detector.detect(scannerVideo);
+          if (codes && codes.length) {
+            const value = codes[0].rawValue;
+            closeScanner();
+            runLookup(value);
+            return;
+          }
+        } catch (_) { /* transient decode error — keep scanning */ }
+        _scanRAF = requestAnimationFrame(tick);
+      };
+      _scanRAF = requestAnimationFrame(tick);
+    } catch (e) {
       setStatus("Couldn't start the camera. Try the Photo option.", "error");
       closeScanner();
     }
   }
 
   function closeScanner() {
-    _scanGen++;
-    if (_scanTimer) clearTimeout(_scanTimer);
-    _scanTimer = null;
-    if (scannerVideo) {
-      scannerVideo.pause();
-      scannerVideo.srcObject = null;
-    }
-    stopStream();
+    if (_scanRAF) cancelAnimationFrame(_scanRAF);
+    _scanRAF = null;
+    if (_stream) { _stream.getTracks().forEach((t) => t.stop()); _stream = null; }
     if (scanner) { scanner.hidden = true; scanner.setAttribute("aria-hidden", "true"); }
   }
 
@@ -729,13 +621,7 @@
 
   $("[data-scan-btn]")?.addEventListener("click", openScanner);
   $("[data-scanner-close]")?.addEventListener("click", closeScanner);
-  photoInput?.addEventListener("change", (e) => {
-    const file = e.target.files && e.target.files[0];
-    // iOS reuses the same camera filename, so a second shot won't fire change
-    // unless the control is cleared.
-    e.target.value = "";
-    handlePhoto(file);
-  });
+  photoInput?.addEventListener("change", (e) => handlePhoto(e.target.files && e.target.files[0]));
 
   $("[data-signin-close]")?.addEventListener("click", closeSignIn);
 
