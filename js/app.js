@@ -476,6 +476,7 @@
   let _zx = null;
   let _zxLoading = null;
   let _scanning = false;
+  let _scanPending = false;
   let _scanGen = 0;
   let _nudgeTimer = null;
 
@@ -568,20 +569,33 @@
   }
 
   async function openScanner() {
-    if (!scanner || !scannerVideo || _scanning) return;
+    if (!scanner || !scannerVideo || _scanning || _scanPending) return;
     const gen = ++_scanGen;
+    _scanPending = true;
     showScanner("Loading the scanner …");
 
     if (!window.isSecureContext || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      _scanPending = false;
       if (scannerHint) scannerHint.textContent = "Live scanning needs camera access over HTTPS.";
       return;
     }
 
     try {
       await loadZXing();
-      if (gen !== _scanGen || scanner.hidden) return;
+    } catch (_) {
+      _scanPending = false;
+      if (gen !== _scanGen) return;
+      if (scannerHint) scannerHint.textContent = "The scanner couldn't load. Use Photo instead.";
+      return;
+    }
 
-      _zx = _zx || createZXingReader();
+    if (gen !== _scanGen || scanner.hidden) {
+      _scanPending = false;
+      return;
+    }
+
+    try {
+      _zx = createZXingReader();
       _scanning = true;
       if (scannerHint) scannerHint.textContent = "Allow camera access, then place the barcode inside the box.";
 
@@ -610,8 +624,20 @@
           runLookup(value);
         }
       );
+      _scanPending = false;
+      // Closing while the iOS permission sheet is open cannot cancel getUserMedia.
+      // Once it resolves, stop the newly attached stream before it can remain active
+      // behind the hidden scanner overlay.
+      if (gen !== _scanGen) {
+        stopCamera();
+        return;
+      }
     } catch (_) {
-      if (gen !== _scanGen) return;
+      _scanPending = false;
+      if (gen !== _scanGen) {
+        stopCamera();
+        return;
+      }
       stopCamera();
       if (scannerHint) {
         scannerHint.textContent = "Couldn't start the scanner. Check camera permission and try again.";
