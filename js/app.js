@@ -472,55 +472,156 @@
   const scanner = $("[data-scanner]");
   const scannerVideo = $("[data-scanner-video]");
   const scannerHint = $("[data-scanner-hint]");
-  let _stream = null;
-  let _scanRAF = null;
+  const ZXING_URL = "js/vendor/zxing-0.21.3.min.js";
+  let _zx = null;
+  let _zxLoading = null;
+  let _scanning = false;
+  let _scanGen = 0;
+  let _nudgeTimer = null;
+
+  function loadZXing() {
+    if (window.ZXing) return Promise.resolve();
+    if (_zxLoading) return _zxLoading;
+    _zxLoading = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      const timeout = setTimeout(() => {
+        script.remove();
+        reject(new Error("ZXing load timeout"));
+      }, 8000);
+      script.src = ZXING_URL;
+      script.async = true;
+      script.onload = () => {
+        clearTimeout(timeout);
+        if (window.ZXing) resolve();
+        else reject(new Error("ZXing unavailable"));
+      };
+      script.onerror = () => {
+        clearTimeout(timeout);
+        reject(new Error("ZXing load error"));
+      };
+      document.head.appendChild(script);
+    }).catch((err) => {
+      _zxLoading = null;
+      throw err;
+    });
+    return _zxLoading;
+  }
+
+  function showScanner(hint) {
+    if (!scanner) return;
+    scanner.hidden = false;
+    scanner.setAttribute("aria-hidden", "false");
+    if (scannerHint) scannerHint.textContent = hint;
+  }
+
+  // ZXing reports UPC-A as EAN-13 with a leading zero.
+  function normalizeScannedCode(raw) {
+    const value = String(raw || "").replace(/\s+/g, "");
+    return /^0\d{12}$/.test(value) ? value.slice(1) : value;
+  }
+
+  function createZXingReader() {
+    const hints = new Map();
+    hints.set(window.ZXing.DecodeHintType.POSSIBLE_FORMATS, [
+      window.ZXing.BarcodeFormat.UPC_A,
+      window.ZXing.BarcodeFormat.UPC_E,
+      window.ZXing.BarcodeFormat.EAN_13,
+      window.ZXing.BarcodeFormat.EAN_8,
+      window.ZXing.BarcodeFormat.CODE_128,
+    ]);
+    hints.set(window.ZXing.DecodeHintType.TRY_HARDER, true);
+    return new window.ZXing.BrowserMultiFormatReader(hints);
+  }
+
+  // iOS 26 can play the camera preview without delivering usable frames to a
+  // decoder. Reapplying constraints after playback starts resets the track.
+  async function nudgeCaptureTrack(video, gen) {
+    if (gen !== _scanGen || !_scanning) return;
+    try {
+      const stream = video && video.srcObject;
+      const track = stream && stream.getVideoTracks && stream.getVideoTracks()[0];
+      if (!track || !track.applyConstraints) return;
+      const caps = track.getCapabilities ? track.getCapabilities() : {};
+      const advanced = [];
+      if (Array.isArray(caps.focusMode) && caps.focusMode.includes("continuous")) {
+        advanced.push({ focusMode: "continuous" });
+      }
+      await track.applyConstraints({
+        width: { ideal: 1280 },
+        frameRate: { ideal: (caps.frameRate && caps.frameRate.max) || 30 },
+        ...(advanced.length ? { advanced } : {}),
+      });
+    } catch (_) { /* best-effort; decoding can still work without the reset */ }
+  }
+
+  function stopCamera() {
+    _scanning = false;
+    if (_nudgeTimer) clearTimeout(_nudgeTimer);
+    _nudgeTimer = null;
+    try { if (_zx) _zx.reset(); } catch (_) { /* already stopped */ }
+    if (scannerVideo) {
+      const stream = scannerVideo.srcObject;
+      if (stream && stream.getTracks) stream.getTracks().forEach((track) => track.stop());
+      scannerVideo.pause();
+      scannerVideo.srcObject = null;
+    }
+  }
 
   async function openScanner() {
-    if (!("BarcodeDetector" in window)) {
-      // No native detector — fall back to the photo path.
-      setStatus("Live scanning isn't supported here — use Photo instead.", null);
-      if (photoInput) photoInput.click();
-      return;
-    }
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      setStatus("Camera unavailable. Try the Photo option.", "error");
-      return;
-    }
-    try {
-      const detector = new window.BarcodeDetector({
-        formats: ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39"],
-      });
-      _stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-      scannerVideo.srcObject = _stream;
-      await scannerVideo.play();
-      scanner.hidden = false;
-      scanner.setAttribute("aria-hidden", "false");
-      if (scannerHint) scannerHint.textContent = "Point the camera at the product barcode.";
+    if (!scanner || !scannerVideo || _scanning) return;
+    const gen = ++_scanGen;
+    showScanner("Loading the scanner …");
 
-      const tick = async () => {
-        if (scanner.hidden) return;
-        try {
-          const codes = await detector.detect(scannerVideo);
-          if (codes && codes.length) {
-            const value = codes[0].rawValue;
-            closeScanner();
-            runLookup(value);
-            return;
-          }
-        } catch (_) { /* transient decode error — keep scanning */ }
-        _scanRAF = requestAnimationFrame(tick);
+    if (!window.isSecureContext || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      if (scannerHint) scannerHint.textContent = "Live scanning needs camera access over HTTPS.";
+      return;
+    }
+
+    try {
+      await loadZXing();
+      if (gen !== _scanGen || scanner.hidden) return;
+
+      _zx = _zx || createZXingReader();
+      _scanning = true;
+      if (scannerHint) scannerHint.textContent = "Allow camera access, then place the barcode inside the box.";
+
+      const onPlaying = () => {
+        if (gen !== _scanGen || !_scanning) return;
+        if (scannerHint) scannerHint.textContent = "Hold steady with the barcode inside the box.";
+        nudgeCaptureTrack(scannerVideo, gen);
       };
-      _scanRAF = requestAnimationFrame(tick);
-    } catch (e) {
-      setStatus("Couldn't start the camera. Try the Photo option.", "error");
-      closeScanner();
+      scannerVideo.addEventListener("playing", onPlaying, { once: true });
+      _nudgeTimer = setTimeout(() => nudgeCaptureTrack(scannerVideo, gen), 1000);
+
+      await _zx.decodeFromConstraints(
+        {
+          video: {
+            facingMode: { ideal: "environment" },
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+          },
+        },
+        scannerVideo,
+        (result) => {
+          if (!result || gen !== _scanGen || !_scanning) return;
+          const value = normalizeScannedCode(result.getText());
+          if (!value) return;
+          closeScanner();
+          runLookup(value);
+        }
+      );
+    } catch (_) {
+      if (gen !== _scanGen) return;
+      stopCamera();
+      if (scannerHint) {
+        scannerHint.textContent = "Couldn't start the scanner. Check camera permission and try again.";
+      }
     }
   }
 
   function closeScanner() {
-    if (_scanRAF) cancelAnimationFrame(_scanRAF);
-    _scanRAF = null;
-    if (_stream) { _stream.getTracks().forEach((t) => t.stop()); _stream = null; }
+    _scanGen++;
+    stopCamera();
     if (scanner) { scanner.hidden = true; scanner.setAttribute("aria-hidden", "true"); }
   }
 

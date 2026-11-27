@@ -62,7 +62,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/app.css?v=3" />
+    <link rel="stylesheet" href="css/app.css?v=4" />
   </head>
   <body class="bg-yora-white text-yora-ink font-sans antialiased">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -214,7 +214,10 @@
           <p class="font-semibold">Scan a barcode</p>
           <button type="button" class="app-scanner__close" data-scanner-close aria-label="Close scanner">&times;</button>
         </div>
-        <video class="app-scanner__video" data-scanner-video playsinline muted></video>
+        <div class="app-scanner__viewport">
+          <video class="app-scanner__video" data-scanner-video autoplay playsinline webkit-playsinline muted></video>
+          <div class="app-scanner__guide" aria-hidden="true"></div>
+        </div>
         <p class="app-scanner__hint" data-scanner-hint>Point the camera at the product barcode.</p>
       </div>
     </div>
@@ -272,6 +275,6 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/app.js?v=3"></script>
+    <script src="js/app.js?v=4"></script>
   </body>
 </html>
